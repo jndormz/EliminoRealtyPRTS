@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Agents">
+    <Key>
+      <PropertyRef Name="AgentId" />
+    </Key>
+    <Property Name="AgentId" Type="bigint" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="250" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="250" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="250" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedAt" Type="datetime" />
+    <Property Name="UpdatedBy" Type="bigint" />
+    <Property Name="UpdatedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="AreaProfiles">
+    <Key>
+      <PropertyRef Name="AreaId" />
+    </Key>
+    <Property Name="AreaId" Type="bigint" Nullable="false" />
+    <Property Name="AreaDescription" Type="nvarchar(max)" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="CommisionPercentage" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="Status" Type="int" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedAt" Type="datetime" />
+    <Property Name="UpdatedBy" Type="bigint" />
+    <Property Name="UpdatedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="ClientId" />
+    </Key>
+    <Property Name="ClientId" Type="bigint" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="250" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="250" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="250" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="Contact" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedAt" Type="datetime" />
+    <Property Name="UpdatedBy" Type="bigint" />
+    <Property Name="UpdatedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Lots">
+    <Key>
+      <PropertyRef Name="LotId" />
+    </Key>
+    <Property Name="LotId" Type="bigint" Nullable="false" />
+    <Property Name="AreaId" Type="bigint" />
+    <Property Name="LotDescription" Type="nvarchar(max)" />
+    <Property Name="Sqm" Type="bigint" />
+    <Property Name="Block" Type="bigint" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="Status" Type="int" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedAt" Type="datetime" />
+    <Property Name="UpdatedBy" Type="bigint" />
+    <Property Name="UpdatedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Modules">
+    <Key>
+      <PropertyRef Name="ModuleId" />
+    </Key>
+    <Property Name="ModuleId" Type="bigint" Nullable="false" />
+    <Property Name="ModuleName" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedAt" Type="datetime" />
+    <Property Name="UpdatedBy" Type="bigint" />
+    <Property Name="UpdatedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserPrivileges">
+    <Key>
+      <PropertyRef Name="UserPrivilegeId" />
+    </Key>
+    <Property Name="UserPrivilegeId" Type="bigint" Nullable="false" />
+    <Property Name="RoleId" Type="bigint" />
+    <Property Name="ModuleId" Type="bigint" />
+    <Property Name="IsVisible" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedAt" Type="datetime" />
+    <Property Name="UpdatedBy" Type="bigint" />
+    <Property Name="UpdatedAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+    <Property Name="RoleId" Type="int" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="250" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="250" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="250" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="250" />
+    <Property Name="Password" Type="nvarchar" MaxLength="250" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedAt" Type="datetime" />
+    <Property Name="UpdatedBy" Type="bigint" />
+    <Property Name="UpdatedAt" Type="datetime" />
+  </EntityType>
+  <EntityContainer Name="DbModelStoreContainer">
+    <EntitySet Name="Agents" EntityType="Self.Agents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AreaProfiles" EntityType="Self.AreaProfiles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Lots" EntityType="Self.Lots" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserPrivileges" EntityType="Self.UserPrivileges" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

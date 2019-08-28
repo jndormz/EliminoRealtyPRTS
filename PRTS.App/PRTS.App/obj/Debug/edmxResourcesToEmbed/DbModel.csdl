@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Module">
+    <Key>
+      <PropertyRef Name="ModuleId" />
+    </Key>
+    <Property Name="ModuleId" Type="Int64" Nullable="false" />
+    <Property Name="ModuleName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int64" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="UserPrivilege">
+    <Key>
+      <PropertyRef Name="UserPrivilegeId" />
+    </Key>
+    <Property Name="UserPrivilegeId" Type="Int64" Nullable="false" />
+    <Property Name="RoleId" Type="Int64" />
+    <Property Name="ModuleId" Type="Int64" />
+    <Property Name="IsVisible" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int64" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <Property Name="RoleId" Type="Int32" />
+    <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="UpdatedBy" Type="Int64" />
+  </EntityType>
+  <EntityContainer Name="DbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Modules" EntityType="Self.Module" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="UserPrivileges" EntityType="Self.UserPrivilege" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="Agents" EntityType="DbModel.Agent" />
+    <EntitySet Name="AreaProfiles" EntityType="DbModel.AreaProfile" />
+    <EntitySet Name="Clients" EntityType="DbModel.Client" />
+    <EntitySet Name="Lots" EntityType="DbModel.Lot" />
+  </EntityContainer>
+  <EntityType Name="Agent">
+    <Key>
+      <PropertyRef Name="AgentId" />
+    </Key>
+    <Property Name="AgentId" Type="Int64" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int64" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="AreaProfile">
+    <Key>
+      <PropertyRef Name="AreaId" />
+    </Key>
+    <Property Name="AreaId" Type="Int64" Nullable="false" />
+    <Property Name="AreaDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CommisionPercentage" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int64" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ClientId" />
+    </Key>
+    <Property Name="ClientId" Type="Int64" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int64" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Contact" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Lot">
+    <Key>
+      <PropertyRef Name="LotId" />
+    </Key>
+    <Property Name="LotId" Type="Int64" Nullable="false" />
+    <Property Name="AreaId" Type="Int64" />
+    <Property Name="LotDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="Int64" />
+    <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <Property Name="Sqm" Type="Int64" />
+    <Property Name="Block" Type="Int64" />
+  </EntityType>
+</Schema>
