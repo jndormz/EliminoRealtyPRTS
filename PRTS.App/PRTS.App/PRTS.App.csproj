@@ -123,6 +123,30 @@
     <Compile Include="Forms\frmLogIn.Designer.cs">
       <DependentUpon>frmLogIn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Libraries\frmClients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Libraries\frmClients.Designer.cs">
+      <DependentUpon>frmClients.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Libraries\frmLots.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Libraries\frmLots.Designer.cs">
+      <DependentUpon>frmLots.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Libraries\frmAreaProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Libraries\frmAreaProfile.Designer.cs">
+      <DependentUpon>frmAreaProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Libraries\frmAgents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Libraries\frmAgents.Designer.cs">
+      <DependentUpon>frmAgents.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Users\frmUserPrivileges.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +184,18 @@
     </Compile>
     <EmbeddedResource Include="Forms\frmLogIn.resx">
       <DependentUpon>frmLogIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Libraries\frmClients.resx">
+      <DependentUpon>frmClients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Libraries\frmLots.resx">
+      <DependentUpon>frmLots.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Libraries\frmAreaProfile.resx">
+      <DependentUpon>frmAreaProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Libraries\frmAgents.resx">
+      <DependentUpon>frmAgents.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Users\frmUserPrivileges.resx">
       <DependentUpon>frmUserPrivileges.cs</DependentUpon>

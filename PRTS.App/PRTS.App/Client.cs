@@ -24,6 +24,7 @@ namespace PRTS.App
         public Nullable<long> UpdatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public string Address { get; set; }
-        public string Contact { get; set; }
+        public string Contact1 { get; set; }
+        public string Contact2 { get; set; }
     }
 }

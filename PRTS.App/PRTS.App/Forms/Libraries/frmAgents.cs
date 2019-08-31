@@ -1,24 +1,23 @@
-﻿namespace PRTS.App.Forms.Users {
+﻿namespace PRTS.App.Forms.Libraries {
 
     using Classes;
-    using Classes.Helpers;
     using System;
     using System.ComponentModel;
     using System.Linq;
     using System.Windows.Forms;
 
-    public partial class FrmUser : Form {
+    public partial class FrmAgents : Form {
 
-        private readonly long _userId;
+        private readonly long _agentId;
         private readonly DbEntities _db = new DbEntities();
         private readonly ModGlobal.FormStatus _formStatus;
 
         public bool IsSaved;
 
-        public FrmUser(long userId, ModGlobal.FormStatus formStatus) {
+        public FrmAgents(long agentId, ModGlobal.FormStatus formStatus) {
             InitializeComponent();
 
-            _userId = userId;
+            _agentId = agentId;
             _formStatus = formStatus;
         }
 
@@ -26,9 +25,7 @@
 
         private void FrmUser_Load(object sender, EventArgs e) {
 
-            LoadRoleData();
-
-            LoadUserData();
+            LoadAgentData();
 
             EnabledControls();
         }
@@ -65,7 +62,7 @@
                 return;
             }
 
-            SaveUser();
+            SaveAgent();
 
             Dispose();
         }
@@ -74,43 +71,37 @@
 
         #region Functions
 
-        private void SaveUser() {
-
-            var comboItem = (ComboBoxItem)cmbRole.SelectedItem;
+        private void SaveAgent() {
 
             if (_formStatus == ModGlobal.FormStatus.IsNew) {
-                var newId = Convert.ToInt64(_db.Users.OrderByDescending(u => u.UserId).FirstOrDefault()?.UserId ?? 0) + 1;
+                var newId = Convert.ToInt64(_db.Agents.OrderByDescending(u => u.AgentId).FirstOrDefault()?.AgentId ?? 0) + 1;
 
-                _db.Users.Add(new User {
-                    UserId = newId,
+                _db.Agents.Add(new Agent {
+                    AgentId = newId,
                     FirstName = txtFirstName.Text,
                     MiddleName = txtMiddleName.Text,
                     LastName = txtLastName.Text,
-                    UserName = txtUsername.Text,
-                    Password = txtPassword.Text,
-                    RoleId = Convert.ToInt32(comboItem.value),
+                    Contact = txtContact.Text,
                     IsActive = cbIsActive.Checked,
                     CreatedBy = ModGlobal.UserId
                 });
             }
             else {
-                var getUser = _db.Users.FirstOrDefault(u => u.UserId == _userId);
+                var getAgent = _db.Agents.FirstOrDefault(u => u.AgentId == _agentId);
 
-                if (getUser == null) {
+                if (getAgent == null) {
                     MessageBox.Show(@"Record not exist.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     return;
                 }
 
-                getUser.FirstName = txtFirstName.Text;
-                getUser.MiddleName = txtMiddleName.Text;
-                getUser.LastName = txtLastName.Text;
-                getUser.UserName = txtUsername.Text;
-                getUser.Password = txtPassword.Text;
-                getUser.RoleId = Convert.ToInt32(comboItem.value);
-                getUser.IsActive = cbIsActive.Checked;
-                getUser.UpdatedBy = ModGlobal.UserId;
-                getUser.UpdatedAt = DateTime.Now;
+                getAgent.FirstName = txtFirstName.Text;
+                getAgent.MiddleName = txtMiddleName.Text;
+                getAgent.LastName = txtLastName.Text;
+                getAgent.Contact = txtContact.Text;
+                getAgent.IsActive = cbIsActive.Checked;
+                getAgent.UpdatedBy = ModGlobal.UserId;
+                getAgent.UpdatedAt = DateTime.Now;
             }
             _db.SaveChanges();
 
@@ -118,50 +109,29 @@
         }
 
         private string ValidateValues() {
-            var user = _db.Users.FirstOrDefault(u => u.UserName == txtUsername.Text && u.UserId != _userId);
+            var agent = _db.Agents.FirstOrDefault(u => 
+                string.Concat(u.FirstName.Trim(), u.LastName.Trim()) == 
+                    string.Concat(txtFirstName.Text.Trim(), txtLastName.Text.Trim()) && 
+                        u.AgentId != _agentId);
 
-            if (user != null) {
-                return @"UserName already exist.";
-
-            }
-
-            if (txtPassword.Text != txtConfirmPassword.Text) {
-                return @"Password doesn't match to its confirmation.";
+            if (agent != null) {
+                return @"Agent already exist.";
             }
 
             return null;
         }
 
-        private void LoadRoleData() {
+        private void LoadAgentData() {
 
-            var privileges = _db.Roles.Where(r => r.RoleId != 0).ToList();
+            if (_agentId != 0) {
 
-            foreach (var privilege in privileges) {
-                cmbRole.Items.Add(new ComboBoxItem(Convert.ToString(privilege.RoleName), Convert.ToString(privilege.RoleId)));
-            }
-
-            cmbRole.ValueMember = "value";
-            cmbRole.DisplayMember = "name";
-
-            if (_formStatus == ModGlobal.FormStatus.IsNew) {
-                cmbRole.SelectedIndex = 0;
-            }
-        }
-
-        private void LoadUserData() {
-
-            if (_userId != 0) {
-
-                var user = _db.Users.FirstOrDefault(u => u.UserId == _userId);
+                var user = _db.Agents.FirstOrDefault(u => u.AgentId == _agentId);
 
                 txtFirstName.Text = user?.FirstName;
                 txtMiddleName.Text = user?.MiddleName;
                 txtLastName.Text = user?.LastName;
-                txtUsername.Text = user?.UserName;
-                txtPassword.Text = user?.Password;
-                txtConfirmPassword.Text = user?.Password;
+                txtContact.Text = user?.Contact;
                 cbIsActive.Checked = user?.IsActive ?? true;
-                cmbRole.SelectedIndex = user?.RoleId - 1 ?? 0;
             }
         }
 
@@ -169,16 +139,12 @@
 
             if (_formStatus == ModGlobal.FormStatus.IsView) {
                 btnSave.Visible = false;
-                txtConfirmPassword.Visible = false;
-                lblConfirmPassword.Visible = false;
 
                 txtFirstName.ReadOnly = true;
                 txtMiddleName.ReadOnly = true;
                 txtLastName.ReadOnly = true;
-                txtUsername.ReadOnly = true;
-                txtPassword.ReadOnly = true;
+                txtContact.ReadOnly = true;
                 cbIsActive.Enabled = false;
-                cmbRole.Enabled = false;
             }
         }
 

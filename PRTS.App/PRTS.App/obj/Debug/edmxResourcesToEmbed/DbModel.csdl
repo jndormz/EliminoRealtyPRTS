@@ -71,6 +71,7 @@
     <Property Name="CreatedAt" Type="DateTime" Precision="3" />
     <Property Name="UpdatedBy" Type="Int64" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <Property Name="Contact" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="AreaProfile">
     <Key>
@@ -101,7 +102,8 @@
     <Property Name="UpdatedBy" Type="Int64" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Contact" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Contact1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Contact2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Lot">
     <Key>

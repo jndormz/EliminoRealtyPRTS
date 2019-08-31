@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using PRTS.App.Classes;
 using PRTS.App.Classes.Forms.Users;
+using PRTS.App.Forms.Libraries;
 using PRTS.App.Forms.Users;
 
 namespace PRTS.App {
@@ -80,6 +81,18 @@ namespace PRTS.App {
             } else if (_currentModule == ModGlobal.ModUserPrivileges) {
                 var user = new FrmUserPrivileges(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value), ModGlobal.FormStatus.IsView);
                 user.ShowDialog();
+            } else if (_currentModule == ModGlobal.ModAreaProfile) {
+                var area = new FrmAreaProfile(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value), ModGlobal.FormStatus.IsView);
+                area.ShowDialog();
+            } else if (_currentModule == ModGlobal.ModLots) {
+                var lot = new FrmLots(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value), ModGlobal.FormStatus.IsView);
+                lot.ShowDialog();
+            } else if (_currentModule == ModGlobal.ModAgents) {
+                var agent = new FrmAgents(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value), ModGlobal.FormStatus.IsView);
+                agent.ShowDialog();
+            } else if (_currentModule == ModGlobal.ModClients) {
+                var client = new FrmClients(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value), ModGlobal.FormStatus.IsView);
+                client.ShowDialog();
             }
         }
 
@@ -89,6 +102,42 @@ namespace PRTS.App {
                 user.ShowDialog();
 
                 if (user.IsSaved) {
+                    LoadData();
+                }
+            } else if (_currentModule == ModGlobal.ModUserPrivileges) {
+                var user = new FrmUserPrivileges(0, ModGlobal.FormStatus.IsNew);
+                user.ShowDialog();
+
+                if (user.IsSaved) {
+                    LoadData();
+                }
+            } else if (_currentModule == ModGlobal.ModAreaProfile) {
+                var area = new FrmAreaProfile(0, ModGlobal.FormStatus.IsNew);
+                area.ShowDialog();
+
+                if (area.IsSaved) {
+                    LoadData();
+                }
+            } else if (_currentModule == ModGlobal.ModLots) {
+                var lot = new FrmLots(0, ModGlobal.FormStatus.IsNew);
+                lot.ShowDialog();
+
+                if (lot.IsSaved) {
+                    LoadData();
+                }
+            } else if (_currentModule == ModGlobal.ModAgents) {
+                var agent = new FrmAgents(0, ModGlobal.FormStatus.IsNew);
+                agent.ShowDialog();
+
+                if (agent.IsSaved) {
+                    LoadData();
+                }
+            }
+            else if (_currentModule == ModGlobal.ModClients) {
+                var client = new FrmClients(0, ModGlobal.FormStatus.IsNew);
+                client.ShowDialog();
+
+                if (client.IsSaved) {
                     LoadData();
                 }
             }
@@ -104,6 +153,46 @@ namespace PRTS.App {
                 user.ShowDialog();
 
                 if (user.IsSaved) {
+                    LoadData();
+                }
+            } else if (_currentModule == ModGlobal.ModUserPrivileges) {
+                var user = new FrmUserPrivileges(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value),
+                    ModGlobal.FormStatus.IsEdit);
+                user.ShowDialog();
+
+                if (user.IsSaved) {
+                    LoadData();
+                }
+            } else if (_currentModule == ModGlobal.ModAreaProfile) {
+                var area = new FrmAreaProfile(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value),
+                    ModGlobal.FormStatus.IsEdit);
+                area.ShowDialog();
+
+                if (area.IsSaved) {
+                    LoadData();
+                }
+            } else if (_currentModule == ModGlobal.ModLots) {
+                var lot = new FrmLots(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value),
+                    ModGlobal.FormStatus.IsEdit);
+                lot.ShowDialog();
+
+                if (lot.IsSaved) {
+                    LoadData();
+                }
+            } else if (_currentModule == ModGlobal.ModAgents) {
+                var agent = new FrmAgents(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value),
+                    ModGlobal.FormStatus.IsEdit);
+                agent.ShowDialog();
+
+                if (agent.IsSaved) {
+                    LoadData();
+                }
+            } else if (_currentModule == ModGlobal.ModClients) {
+                var client = new FrmClients(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value),
+                    ModGlobal.FormStatus.IsEdit);
+                client.ShowDialog();
+
+                if (client.IsSaved) {
                     LoadData();
                 }
             }
@@ -236,6 +325,7 @@ namespace PRTS.App {
                         select new {
                             Id = a.AgentId,
                             Fullname = a.FirstName + " " + a.LastName,
+                            a.Contact,
                             a.IsActive,
                             a.CreatedAt,
                             a.UpdatedAt
@@ -250,7 +340,8 @@ namespace PRTS.App {
                             Id = c.ClientId,
                             Fullname = c.FirstName + " " + c.LastName,
                             c.Address,
-                            c.Contact,
+                            c.Contact1,
+                            c.Contact2,
                             c.IsActive,
                             c.CreatedAt,
                             c.UpdatedAt
@@ -336,7 +427,22 @@ namespace PRTS.App {
                 dgvMain.Columns[8].Width = 150;
                 dgvMain.Columns[8].HeaderText = @"Updated At";
             }
-            else if (_currentModule == ModGlobal.ModClients) {
+            else if (_currentModule == ModGlobal.ModAgents) {
+                dgvMain.Columns[0].Width = 50;
+                dgvMain.Columns[0].HeaderText = @"Id";
+                dgvMain.Columns[1].Width = 200;
+                dgvMain.Columns[1].HeaderText = @"Fullname";
+                dgvMain.Columns[2].Width = 200;
+                dgvMain.Columns[2].HeaderText = @"Contact";
+                dgvMain.Columns[3].Width = 100;
+                dgvMain.Columns[3].HeaderText = @"Is Active?";
+                dgvMain.Columns[4].Width = 150;
+                dgvMain.Columns[4].HeaderText = @"Created At";
+                dgvMain.Columns[5].Width = 150;
+                dgvMain.Columns[5].HeaderText = @"Updated At";
+            }
+            else if (_currentModule == ModGlobal.ModClients)
+            {
                 dgvMain.Columns[0].Width = 50;
                 dgvMain.Columns[0].HeaderText = @"Id";
                 dgvMain.Columns[1].Width = 200;
@@ -344,13 +450,15 @@ namespace PRTS.App {
                 dgvMain.Columns[2].Width = 350;
                 dgvMain.Columns[2].HeaderText = @"Address";
                 dgvMain.Columns[3].Width = 200;
-                dgvMain.Columns[3].HeaderText = @"Contact";
-                dgvMain.Columns[4].Width = 100;
-                dgvMain.Columns[4].HeaderText = @"Is Active?";
-                dgvMain.Columns[5].Width = 150;
-                dgvMain.Columns[5].HeaderText = @"Created At";
+                dgvMain.Columns[3].HeaderText = @"Contact 1";
+                dgvMain.Columns[4].Width = 200;
+                dgvMain.Columns[4].HeaderText = @"Contact 2";
+                dgvMain.Columns[5].Width = 100;
+                dgvMain.Columns[5].HeaderText = @"Is Active?";
                 dgvMain.Columns[6].Width = 150;
-                dgvMain.Columns[6].HeaderText = @"Updated At";
+                dgvMain.Columns[6].HeaderText = @"Created At";
+                dgvMain.Columns[7].Width = 150;
+                dgvMain.Columns[7].HeaderText = @"Updated At";
             }
         }
 

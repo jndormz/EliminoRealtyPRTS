@@ -66,14 +66,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PRTS.App.exe" size="180192">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PRTS.App.exe" size="158176">
       <assemblyIdentity name="PRTS.App" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Yz0sQ1t0nu8bhd8xiiaKA7mJHPwNH/jKTOGkdu7PDME=</dsig:DigestValue>
+        <dsig:DigestValue>BFWh2EsiyoKbTLsg7KJ7Vdh/oneeDkHVLt14mCtsUPQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

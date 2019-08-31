@@ -18,40 +18,7 @@ namespace PRTS.App.Forms {
 
         private void BtnLogin_Click(object sender, EventArgs e) {
 
-            if (!ValidateChildren(ValidationConstraints.Enabled)) {
-                return;
-            }
-
-            var loginLogic = new LoginLogic();
-
-            var userLogin = loginLogic.UserLogin(txtUsername.Text, txtPassword.Text);
-
-            if (!userLogin.Succeed) {
-                MessageBox.Show(userLogin.Message[0], @"Input error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else {
-                isLogIn = true;
-                ModGlobal.UserId = userLogin.Data.UserId;
-                ModGlobal.User = string.Concat(userLogin.Data.FirstName,
-                    " ",
-                    !string.IsNullOrEmpty(userLogin.Data.MiddleName) ? string.Concat(userLogin.Data.MiddleName.Substring(0, 1),".") : "",
-                    " ",
-                    userLogin.Data.LastName);
-                ModGlobal.RoleId = userLogin.Data.UserRole.RoleId;
-                ModGlobal.Role = userLogin.Data.UserRole.Role;
-
-                ModGlobal.PrivAreaProfile = userLogin.Data.UserPrivileges.AreaProfile;
-                ModGlobal.PrivLots = userLogin.Data.UserPrivileges.Lots;
-                ModGlobal.PrivAgents = userLogin.Data.UserPrivileges.Agents;
-                ModGlobal.PrivClients = userLogin.Data.UserPrivileges.Clients;
-                ModGlobal.PrivIncomingPayments = userLogin.Data.UserPrivileges.IncomingPayments;
-                ModGlobal.PrivOutgoingPayments = userLogin.Data.UserPrivileges.OutgoingPayments;
-                ModGlobal.PrivReports = userLogin.Data.UserPrivileges.Reports;
-                ModGlobal.PrivUserPrivileges = userLogin.Data.UserPrivileges.UserPrivileges;
-                ModGlobal.PrivUserManagement = userLogin.Data.UserPrivileges.UserManagement;
-
-                Dispose();
-            }
+            LogIn();
         }
 
         private void BtnClose_Click(object sender, EventArgs e) {
@@ -73,5 +40,56 @@ namespace PRTS.App.Forms {
                 loginErrorProvider.SetError(txtPassword, ModGlobal.ErrRequiredField);
             }
         }
+
+        private void FrmLogIn_KeyUp(object sender, KeyEventArgs e) {
+
+            if (e.KeyCode == Keys.Enter && txtPassword.Focused) {
+                LogIn();
+            }
+        }
+
+        #region Functions
+
+        private void LogIn() {
+
+            if (!ValidateChildren(ValidationConstraints.Enabled)) {
+                return;
+            }
+
+            var loginLogic = new LoginLogic();
+
+            var userLogin = loginLogic.UserLogin(txtUsername.Text, txtPassword.Text);
+
+            if (!userLogin.Succeed)
+            {
+                MessageBox.Show(userLogin.Message[0], @"Input error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                isLogIn = true;
+                ModGlobal.UserId = userLogin.Data.UserId;
+                ModGlobal.User = string.Concat(userLogin.Data.FirstName,
+                    " ",
+                    !string.IsNullOrEmpty(userLogin.Data.MiddleName) ? string.Concat(userLogin.Data.MiddleName.Substring(0, 1), ".") : "",
+                    " ",
+                    userLogin.Data.LastName);
+                ModGlobal.RoleId = userLogin.Data.UserRole.RoleId;
+                ModGlobal.Role = userLogin.Data.UserRole.Role;
+
+                ModGlobal.PrivAreaProfile = userLogin.Data.UserPrivileges.AreaProfile;
+                ModGlobal.PrivLots = userLogin.Data.UserPrivileges.Lots;
+                ModGlobal.PrivAgents = userLogin.Data.UserPrivileges.Agents;
+                ModGlobal.PrivClients = userLogin.Data.UserPrivileges.Clients;
+                ModGlobal.PrivIncomingPayments = userLogin.Data.UserPrivileges.IncomingPayments;
+                ModGlobal.PrivOutgoingPayments = userLogin.Data.UserPrivileges.OutgoingPayments;
+                ModGlobal.PrivReports = userLogin.Data.UserPrivileges.Reports;
+                ModGlobal.PrivUserPrivileges = userLogin.Data.UserPrivileges.UserPrivileges;
+                ModGlobal.PrivUserManagement = userLogin.Data.UserPrivileges.UserManagement;
+
+                Dispose();
+            }
+        }
+
+        #endregion
     }
 }

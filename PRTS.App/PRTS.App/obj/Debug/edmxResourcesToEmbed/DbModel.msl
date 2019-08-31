@@ -56,6 +56,7 @@
     <EntitySetMapping Name="Agents">
       <EntityTypeMapping TypeName="DbModel.Agent">
         <MappingFragment StoreEntitySet="Agents">
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
           <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
@@ -87,7 +88,8 @@
     <EntitySetMapping Name="Clients">
       <EntityTypeMapping TypeName="DbModel.Client">
         <MappingFragment StoreEntitySet="Clients">
-          <ScalarProperty Name="Contact" ColumnName="Contact" />
+          <ScalarProperty Name="Contact2" ColumnName="Contact2" />
+          <ScalarProperty Name="Contact1" ColumnName="Contact1" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
