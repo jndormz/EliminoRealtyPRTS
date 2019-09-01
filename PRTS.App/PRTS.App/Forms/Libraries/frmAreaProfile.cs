@@ -67,11 +67,26 @@
             Dispose();
         }
 
+        private void TxtCommisionPercentage_TextChanged(object sender, EventArgs e) {
+            if (System.Text.RegularExpressions.Regex.IsMatch(txtCommisionPercentage.Text, "  ^ [0-9]")) {
+                txtCommisionPercentage.Text = "";
+            }
+        }
+
+        private void TxtCommisionPercentage_KeyPress(object sender, KeyPressEventArgs e) {
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.')) {
+                e.Handled = true;
+            }
+        }
+
         #endregion
 
-        #region Functions
+        #region Functions & Methods
 
         private void SaveArea() {
+
+            const int isOpen = 1;
 
             if (_formStatus == ModGlobal.FormStatus.IsNew) {
                 var newId = Convert.ToInt64(_db.AreaProfiles.OrderByDescending(u => u.AreaId).FirstOrDefault()?.AreaId ?? 0) + 1;
@@ -82,7 +97,9 @@
                     Address = txtAddress.Text,
                     CommisionPercentage = Convert.ToDecimal(txtCommisionPercentage.Text),
                     Remarks = txtRemarks.Text,
-                    CreatedBy = ModGlobal.UserId
+                    CreatedBy = ModGlobal.UserId,
+                    CreatedAt = DateTime.Now,
+                    Status = isOpen
                 });
             }
             else {
@@ -141,6 +158,7 @@
                 txtRemarks.ReadOnly = true;
             }
         }
+
 
         #endregion
     }

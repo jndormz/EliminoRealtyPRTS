@@ -44,6 +44,9 @@
             this.txtContact = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.UserErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -127,7 +130,7 @@
             this.cbIsActive.Location = new System.Drawing.Point(320, 63);
             this.cbIsActive.Name = "cbIsActive";
             this.cbIsActive.Size = new System.Drawing.Size(119, 26);
-            this.cbIsActive.TabIndex = 4;
+            this.cbIsActive.TabIndex = 7;
             this.cbIsActive.Text = "Is Active?";
             this.cbIsActive.UseVisualStyleBackColor = true;
             // 
@@ -140,7 +143,7 @@
             this.btnSave.Location = new System.Drawing.Point(196, 278);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(146, 32);
-            this.btnSave.TabIndex = 9;
+            this.btnSave.TabIndex = 5;
             this.btnSave.Text = "&Save && Close";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
@@ -155,7 +158,7 @@
             this.btnClose.Location = new System.Drawing.Point(348, 278);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(91, 32);
-            this.btnClose.TabIndex = 10;
+            this.btnClose.TabIndex = 6;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
@@ -181,7 +184,7 @@
             this.txtContact.Location = new System.Drawing.Point(196, 210);
             this.txtContact.Name = "txtContact";
             this.txtContact.Size = new System.Drawing.Size(243, 31);
-            this.txtContact.TabIndex = 3;
+            this.txtContact.TabIndex = 4;
             this.txtContact.Validating += new System.ComponentModel.CancelEventHandler(this.Field_Validation);
             // 
             // groupBox1
@@ -199,6 +202,39 @@
             this.groupBox2.Size = new System.Drawing.Size(450, 1);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(70, 102);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(19, 22);
+            this.label9.TabIndex = 14;
+            this.label9.Text = "*";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(85, 211);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(19, 22);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "*";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Red;
+            this.label7.Location = new System.Drawing.Point(64, 173);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(19, 22);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "*";
             // 
             // FrmAgents
             // 
@@ -219,6 +255,9 @@
             this.Controls.Add(this.txtFirstName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label9);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmAgents";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -246,5 +285,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label9;
     }
 }

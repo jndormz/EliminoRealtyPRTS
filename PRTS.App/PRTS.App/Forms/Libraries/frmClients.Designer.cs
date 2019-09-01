@@ -48,6 +48,9 @@
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.UserErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,7 +134,7 @@
             this.cbIsActive.Location = new System.Drawing.Point(320, 54);
             this.cbIsActive.Name = "cbIsActive";
             this.cbIsActive.Size = new System.Drawing.Size(119, 26);
-            this.cbIsActive.TabIndex = 4;
+            this.cbIsActive.TabIndex = 9;
             this.cbIsActive.Text = "Is Active?";
             this.cbIsActive.UseVisualStyleBackColor = true;
             // 
@@ -144,7 +147,7 @@
             this.btnSave.Location = new System.Drawing.Point(196, 430);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(146, 32);
-            this.btnSave.TabIndex = 9;
+            this.btnSave.TabIndex = 7;
             this.btnSave.Text = "&Save && Close";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
@@ -159,7 +162,7 @@
             this.btnClose.Location = new System.Drawing.Point(348, 430);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(91, 32);
-            this.btnClose.TabIndex = 10;
+            this.btnClose.TabIndex = 8;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
@@ -185,7 +188,7 @@
             this.txtContact1.Location = new System.Drawing.Point(196, 318);
             this.txtContact1.Name = "txtContact1";
             this.txtContact1.Size = new System.Drawing.Size(243, 31);
-            this.txtContact1.TabIndex = 3;
+            this.txtContact1.TabIndex = 5;
             this.txtContact1.Validating += new System.ComponentModel.CancelEventHandler(this.Field_Validation);
             // 
             // label6
@@ -205,8 +208,7 @@
             this.txtContact2.Location = new System.Drawing.Point(196, 355);
             this.txtContact2.Name = "txtContact2";
             this.txtContact2.Size = new System.Drawing.Size(243, 31);
-            this.txtContact2.TabIndex = 3;
-            this.txtContact2.Validating += new System.ComponentModel.CancelEventHandler(this.Field_Validation);
+            this.txtContact2.TabIndex = 6;
             // 
             // label7
             // 
@@ -226,8 +228,7 @@
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(243, 115);
-            this.txtAddress.TabIndex = 3;
-            this.txtAddress.Validating += new System.ComponentModel.CancelEventHandler(this.Field_Validation);
+            this.txtAddress.TabIndex = 4;
             // 
             // groupBox1
             // 
@@ -244,6 +245,39 @@
             this.groupBox2.Size = new System.Drawing.Size(450, 1);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Red;
+            this.label8.Location = new System.Drawing.Point(71, 89);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(19, 22);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "*";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(69, 320);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(19, 22);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "*";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(66, 163);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(19, 22);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "*";
             // 
             // FrmClients
             // 
@@ -268,6 +302,9 @@
             this.Controls.Add(this.txtFirstName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmClients";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -299,5 +336,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
     }
 }

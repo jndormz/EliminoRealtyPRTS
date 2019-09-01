@@ -45,6 +45,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.UserErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,7 +99,9 @@
             this.txtBlock.Location = new System.Drawing.Point(196, 171);
             this.txtBlock.Name = "txtBlock";
             this.txtBlock.Size = new System.Drawing.Size(243, 31);
-            this.txtBlock.TabIndex = 2;
+            this.txtBlock.TabIndex = 4;
+            this.txtBlock.TextChanged += new System.EventHandler(this.TxtBlock_TextChanged);
+            this.txtBlock.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtBlock_KeyPress);
             // 
             // label4
             // 
@@ -116,6 +121,8 @@
             this.txtTotalSqm.Name = "txtTotalSqm";
             this.txtTotalSqm.Size = new System.Drawing.Size(243, 31);
             this.txtTotalSqm.TabIndex = 3;
+            this.txtTotalSqm.TextChanged += new System.EventHandler(this.TxtTotalSqm_TextChanged);
+            this.txtTotalSqm.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtTotalSqm_KeyPress);
             this.txtTotalSqm.Validating += new System.ComponentModel.CancelEventHandler(this.Field_Validation);
             // 
             // label5
@@ -136,8 +143,7 @@
             this.txtRemarks.Multiline = true;
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.Size = new System.Drawing.Size(243, 121);
-            this.txtRemarks.TabIndex = 6;
-            this.txtRemarks.Validating += new System.ComponentModel.CancelEventHandler(this.Field_Validation);
+            this.txtRemarks.TabIndex = 5;
             // 
             // btnSave
             // 
@@ -148,7 +154,7 @@
             this.btnSave.Location = new System.Drawing.Point(196, 370);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(146, 32);
-            this.btnSave.TabIndex = 9;
+            this.btnSave.TabIndex = 6;
             this.btnSave.Text = "&Save && Close";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
@@ -163,7 +169,7 @@
             this.btnClose.Location = new System.Drawing.Point(348, 370);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(91, 32);
-            this.btnClose.TabIndex = 10;
+            this.btnClose.TabIndex = 7;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
@@ -181,7 +187,7 @@
             this.cmbArea.Location = new System.Drawing.Point(196, 98);
             this.cmbArea.Name = "cmbArea";
             this.cmbArea.Size = new System.Drawing.Size(243, 30);
-            this.cmbArea.TabIndex = 11;
+            this.cmbArea.TabIndex = 2;
             // 
             // label8
             // 
@@ -210,11 +216,45 @@
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(28, 62);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(19, 22);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "*";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Red;
+            this.label7.Location = new System.Drawing.Point(117, 100);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(19, 22);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "*";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(76, 135);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(19, 22);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "*";
+            // 
             // FrmLots
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(472, 428);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.cmbArea);
@@ -230,6 +270,8 @@
             this.Controls.Add(this.txtLotDescription);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label7);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmLots";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -258,5 +300,8 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label7;
     }
 }

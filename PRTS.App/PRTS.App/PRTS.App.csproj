@@ -97,6 +97,7 @@
     <Compile Include="Classes\Forms\UserPrivileges\UserPrivilegeModels.cs" />
     <Compile Include="Classes\Forms\Users\UserModels.cs" />
     <Compile Include="Classes\Helpers\ComboBoxItem.cs" />
+    <Compile Include="Classes\Helpers\InitialValues.cs" />
     <Compile Include="Classes\ModGlobal.cs" />
     <Compile Include="Classes\ResponseModel.cs" />
     <Compile Include="Client.cs">

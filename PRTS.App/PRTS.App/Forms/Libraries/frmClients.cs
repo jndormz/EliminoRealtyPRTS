@@ -85,7 +85,8 @@
                     Contact1 = txtContact1.Text,
                     Contact2 = txtContact2.Text,
                     IsActive = cbIsActive.Checked,
-                    CreatedBy = ModGlobal.UserId
+                    CreatedBy = ModGlobal.UserId,
+                    CreatedAt = DateTime.Now
                 });
             }
             else {

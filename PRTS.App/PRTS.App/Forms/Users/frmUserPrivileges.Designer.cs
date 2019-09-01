@@ -36,6 +36,7 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.UserErrorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.dgvUserPrivileges = new System.Windows.Forms.DataGridView();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.UserErrorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUserPrivileges)).BeginInit();
             this.SuspendLayout();
@@ -110,8 +111,20 @@
             this.dgvUserPrivileges.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUserPrivileges.Location = new System.Drawing.Point(34, 111);
             this.dgvUserPrivileges.Name = "dgvUserPrivileges";
+            this.dgvUserPrivileges.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvUserPrivileges.Size = new System.Drawing.Size(405, 283);
             this.dgvUserPrivileges.TabIndex = 11;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(18, 66);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(19, 22);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "*";
             // 
             // FrmUserPrivileges
             // 
@@ -124,6 +137,7 @@
             this.Controls.Add(this.txtRoleDescription);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.label6);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmUserPrivileges";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -144,5 +158,6 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.ErrorProvider UserErrorProvider;
         private System.Windows.Forms.DataGridView dgvUserPrivileges;
+        private System.Windows.Forms.Label label6;
     }
 }

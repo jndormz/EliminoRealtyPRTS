@@ -90,7 +90,8 @@
                     Password = txtPassword.Text,
                     RoleId = Convert.ToInt32(comboItem.value),
                     IsActive = cbIsActive.Checked,
-                    CreatedBy = ModGlobal.UserId
+                    CreatedBy = ModGlobal.UserId,
+                    CreatedAt = DateTime.Now
                 });
             }
             else {

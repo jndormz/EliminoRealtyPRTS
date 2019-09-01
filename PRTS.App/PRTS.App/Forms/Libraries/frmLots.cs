@@ -1,6 +1,7 @@
 ﻿namespace PRTS.App.Forms.Libraries {
 
     using Classes;
+    using Classes.Helpers;
     using System;
     using System.ComponentModel;
     using System.Linq;
@@ -24,6 +25,8 @@
         #region Events
 
         private void FrmUser_Load(object sender, EventArgs e) {
+
+            LoadAreaData();
 
             LoadLotData();
 
@@ -67,23 +70,53 @@
             Dispose();
         }
 
+        private void TxtTotalSqm_TextChanged(object sender, EventArgs e) {
+            if (System.Text.RegularExpressions.Regex.IsMatch(txtTotalSqm.Text, "  ^ [0-9]")) {
+                txtTotalSqm.Text = "";
+            }
+        }
+
+        private void TxtTotalSqm_KeyPress(object sender, KeyPressEventArgs e) {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) {
+                e.Handled = true;
+            }
+        }
+
+        private void TxtBlock_TextChanged(object sender, EventArgs e) {
+            if (System.Text.RegularExpressions.Regex.IsMatch(txtBlock.Text, "  ^ [0-9]")) {
+                txtBlock.Text = "";
+            }
+        }
+
+        private void TxtBlock_KeyPress(object sender, KeyPressEventArgs e) {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) {
+                e.Handled = true;
+            }
+        }
+
         #endregion
 
         #region Functions
 
         private void SaveLot() {
 
+            const int isOpen = 1;
+
+            var comboItem = (ComboBoxItem)cmbArea.SelectedItem;
+
             if (_formStatus == ModGlobal.FormStatus.IsNew) {
                 var newId = Convert.ToInt64(_db.Lots.OrderByDescending(u => u.LotId).FirstOrDefault()?.LotId ?? 0) + 1;
 
                 _db.Lots.Add(new Lot {
                     LotId = newId,
-                    //AreaId = Convert.ToInt32(cmbArea.value),
+                    AreaId = Convert.ToInt32(comboItem.value),
                     LotDescription = txtLotDescription.Text,
                     Sqm = Convert.ToInt64(txtTotalSqm.Text),
-                    Block = Convert.ToInt64(txtBlock.Text),
+                    Block = Convert.ToInt64(string.IsNullOrEmpty(txtBlock.Text) ? "0" : txtBlock.Text),
                     Remarks = txtRemarks.Text,
-                    CreatedBy = ModGlobal.UserId
+                    CreatedBy = ModGlobal.UserId,
+                    CreatedAt = DateTime.Now,
+                    Status = isOpen
                 });
             }
             else {
@@ -95,7 +128,7 @@
                     return;
                 }
 
-                //getLot.AreaId = Convert.ToInt32(cmbArea.value);
+                getLot.AreaId = Convert.ToInt32(comboItem.value);
                 getLot.LotDescription = txtLotDescription.Text;
                 getLot.Sqm = Convert.ToInt64(txtTotalSqm.Text);
                 getLot.Block = Convert.ToInt64(txtBlock.Text);
@@ -109,14 +142,34 @@
         }
 
         private string ValidateValues() {
-            var lot = _db.Lots.FirstOrDefault(u => u.LotDescription == txtLotDescription.Text && u.LotId != _lotId);
+            var comboItem = (ComboBoxItem)cmbArea.SelectedItem;
+
+            var areaId = Convert.ToInt32(comboItem.value);
+
+            var lot = _db.Lots.FirstOrDefault(u => u.LotDescription == txtLotDescription.Text && u.AreaId == areaId && u.LotId != _lotId);
 
             if (lot != null) {
-                return @"Lot Description already exist.";
+                return $"Lot Description already exist for this area({comboItem.name}).";
 
             }
 
             return null;
+        }
+
+        private void LoadAreaData() {
+
+            var areas = _db.AreaProfiles.Where(r => r.AreaId != 0).OrderBy(r => r.AreaId).ToList();
+
+            foreach (var area in areas) {
+                cmbArea.Items.Add(new ComboBoxItem(Convert.ToString(area.AreaDescription), Convert.ToString(area.AreaId)));
+            }
+
+            cmbArea.ValueMember = "value";
+            cmbArea.DisplayMember = "name";
+
+            if (_formStatus == ModGlobal.FormStatus.IsNew) {
+                cmbArea.SelectedIndex = 0;
+            }
         }
 
         private void LoadLotData() {
@@ -125,7 +178,7 @@
 
                 var lot = _db.Lots.FirstOrDefault(u => u.LotId == _lotId);
 
-                //cmbArea.SelectedIndex = lot?.AreaId - 1 ?? 0;
+                cmbArea.SelectedIndex = Convert.ToInt32(lot?.AreaId ?? 1) - 1;
                 txtLotDescription.Text = lot?.LotDescription;
                 txtBlock.Text = lot?.Block.ToString();
                 txtTotalSqm.Text = lot?.Sqm.ToString();

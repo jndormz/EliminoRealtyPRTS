@@ -1,7 +1,6 @@
 ﻿namespace PRTS.App.Forms.Users {
 
     using Classes;
-    using Classes.Helpers;
     using System;
     using System.ComponentModel;
     using System.Linq;
@@ -9,16 +8,16 @@
 
     public partial class FrmUserPrivileges : Form {
 
-        private readonly long _userId;
+        private readonly long _roleId;
         private readonly DbEntities _db = new DbEntities();
         private readonly ModGlobal.FormStatus _formStatus;
 
         public bool IsSaved;
 
-        public FrmUserPrivileges(long userId, ModGlobal.FormStatus formStatus) {
+        public FrmUserPrivileges(long roleId, ModGlobal.FormStatus formStatus) {
             InitializeComponent();
 
-            _userId = userId;
+            _roleId = roleId;
             _formStatus = formStatus;
         }
 
@@ -65,7 +64,7 @@
                 return;
             }
 
-            SaveUser();
+            SaveUserPrivileges();
 
             Dispose();
         }
@@ -74,30 +73,30 @@
 
         #region Functions
 
-        private void SaveUser() {
+        private void SaveUserPrivileges() {
 
             if (_formStatus == ModGlobal.FormStatus.IsNew) {
-                var newId = Convert.ToInt64(_db.Users.OrderByDescending(u => u.UserId).FirstOrDefault()?.UserId ?? 0) + 1;
+                var newId = Convert.ToInt32(_db.Roles.OrderByDescending(u => u.RoleId).FirstOrDefault()?.RoleId ?? 0) + 1;
 
-                _db.Users.Add(new User {
-                    UserId = newId,
-                    FirstName = txtRoleDescription.Text,
+                _db.Roles.Add(new Role {
+                    RoleId = newId,
+                    RoleName = txtRoleDescription.Text,
                     CreatedBy = ModGlobal.UserId,
                     CreatedAt = DateTime.Now
                 });
             }
             else {
-                var getUser = _db.Users.FirstOrDefault(u => u.UserId == _userId);
+                var getRole = _db.Roles.FirstOrDefault(u => u.RoleId == _roleId);
 
-                if (getUser == null) {
+                if (getRole == null) {
                     MessageBox.Show(@"Record not exist.", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                     return;
                 }
 
-                getUser.FirstName = txtRoleDescription.Text;
-                getUser.UpdatedBy = ModGlobal.UserId;
-                getUser.UpdatedAt = DateTime.Now;
+                getRole.RoleName = txtRoleDescription.Text;
+                getRole.UpdatedBy = ModGlobal.UserId;
+                getRole.UpdatedAt = DateTime.Now;
             }
             _db.SaveChanges();
 
@@ -105,7 +104,7 @@
         }
 
         private string ValidateValues() {
-            var user = _db.Users.FirstOrDefault(u => u.UserName == txtRoleDescription.Text && u.UserId != _userId);
+            var user = _db.Users.FirstOrDefault(u => u.UserName == txtRoleDescription.Text && u.UserId != _roleId);
 
             if (user != null) {
                 return @"Role already exist.";
@@ -117,11 +116,11 @@
 
         private void LoadUserData() {
 
-            if (_userId != 0) {
+            if (_roleId != 0) {
 
-                var user = _db.Users.FirstOrDefault(u => u.UserId == _userId);
+                var user = _db.Roles.FirstOrDefault(u => u.RoleId == _roleId);
 
-                txtRoleDescription.Text = user?.FirstName;
+                txtRoleDescription.Text = user?.RoleName;
             }
         }
 
@@ -130,6 +129,7 @@
             var modules = 
                 (from m in _db.Modules
                     select new {
+                        Select = false,
                         m.ModuleName
                     }).ToList();
 

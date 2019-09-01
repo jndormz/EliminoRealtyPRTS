@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="AgentId" />
           </Key>
-          <Property Name="AgentId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgentId" Type="bigint" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="250" />
           <Property Name="MiddleName" Type="nvarchar" MaxLength="250" />
           <Property Name="LastName" Type="nvarchar" MaxLength="250" />
@@ -24,7 +24,7 @@
           <Key>
             <PropertyRef Name="AreaId" />
           </Key>
-          <Property Name="AreaId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AreaId" Type="bigint" Nullable="false" />
           <Property Name="AreaDescription" Type="nvarchar(max)" />
           <Property Name="Address" Type="nvarchar(max)" />
           <Property Name="CommisionPercentage" Type="decimal" Precision="18" Scale="2" />
@@ -39,7 +39,7 @@
           <Key>
             <PropertyRef Name="ClientId" />
           </Key>
-          <Property Name="ClientId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientId" Type="bigint" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="250" />
           <Property Name="MiddleName" Type="nvarchar" MaxLength="250" />
           <Property Name="LastName" Type="nvarchar" MaxLength="250" />
@@ -56,7 +56,7 @@
           <Key>
             <PropertyRef Name="LotId" />
           </Key>
-          <Property Name="LotId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LotId" Type="bigint" Nullable="false" />
           <Property Name="AreaId" Type="bigint" />
           <Property Name="LotDescription" Type="nvarchar(max)" />
           <Property Name="Sqm" Type="bigint" />
@@ -79,7 +79,7 @@
           <Key>
             <PropertyRef Name="RoleId" />
           </Key>
-          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
           <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedBy" Type="bigint" />
           <Property Name="CreatedAt" Type="datetime" />

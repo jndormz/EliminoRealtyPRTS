@@ -1,14 +1,14 @@
-﻿using PRTS.App.Forms;
-using System;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
-using PRTS.App.Classes;
-using PRTS.App.Classes.Forms.Users;
-using PRTS.App.Forms.Libraries;
-using PRTS.App.Forms.Users;
+﻿namespace PRTS.App {
 
-namespace PRTS.App {
+    using Classes;
+    using Forms;
+    using Forms.Libraries;
+    using Forms.Users;
+    using System;
+    using System.Drawing;
+    using System.Linq;
+    using System.Windows.Forms;
+
     public partial class frmMain : Form {
 
         private string _currentModule = "";
@@ -73,7 +73,10 @@ namespace PRTS.App {
 
         private void TsView_Click(object sender, EventArgs e) {
 
-            if (dgvMain.Rows.Count == 0) return;
+            if (dgvMain.Rows.Count == 0)  {
+                MessageBox.Show(@"There are no records to view.", @"Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             if (_currentModule == ModGlobal.ModUserManagement) {
                 var user = new FrmUser(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value), ModGlobal.FormStatus.IsView);
@@ -119,6 +122,16 @@ namespace PRTS.App {
                     LoadData();
                 }
             } else if (_currentModule == ModGlobal.ModLots) {
+
+                const int isOpen = 1;
+
+                var area = _db.AreaProfiles.FirstOrDefault(a => a.Status == isOpen);
+
+                if (area == null) {
+                    MessageBox.Show(@"There are no active Area Profile for Lot to assign to. Please contact the administrator for more info.", @"Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 var lot = new FrmLots(0, ModGlobal.FormStatus.IsNew);
                 lot.ShowDialog();
 
@@ -145,7 +158,10 @@ namespace PRTS.App {
 
         private void TsEdit_Click(object sender, EventArgs e) {
 
-            if (dgvMain.Rows.Count == 0) return;
+            if (dgvMain.Rows.Count == 0) {
+                MessageBox.Show(@"There are no records to edit.", @"Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             if (_currentModule == ModGlobal.ModUserManagement) {
                 var user = new FrmUser(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value),
@@ -279,7 +295,7 @@ namespace PRTS.App {
                                     Id = u.UserId,
                                     Fullname = u.FirstName + " " + u.LastName,
                                     Role = r.RoleName,
-                                    u.IsActive,
+                                    IsActive = u.IsActive ?? false,
                                     u.CreatedAt,
                                     u.UpdatedAt
                                 }).OrderByDescending(u => u.Id).ToList();
@@ -288,16 +304,22 @@ namespace PRTS.App {
             }
             else if (_currentModule == ModGlobal.ModAreaProfile) {
                 var areas = (from a in _db.AreaProfiles
-                    select new {
-                        Id = a.AreaId,
-                        Description = a.AreaDescription,
-                        a.Address,
-                        CommPercentage = a.CommisionPercentage,
-                        a.Remarks,
-                        Status = a.Status == 1 ? "Open" : "Closed",
-                        a.CreatedAt,
-                        a.UpdatedAt
-                    }).OrderByDescending(a => a.Id).ToList();
+                    join u in _db.Users on a.CreatedBy equals u.UserId into au
+                        from u in au.DefaultIfEmpty()
+                            join u2 in _db.Users on a.UpdatedBy equals u2.UserId into au2
+                                from u2 in au2.DefaultIfEmpty()
+                                     select new {
+                                        Id = a.AreaId,
+                                        Description = a.AreaDescription,
+                                        a.Address,
+                                        CommPercentage = a.CommisionPercentage,
+                                        a.Remarks,
+                                        Status = a.Status == 1 ? "Open" : "Closed",
+                                        CreatedBy = u.FirstName + " " + u.LastName,
+                                        a.CreatedAt,
+                                        UpdatedBy = u2.FirstName + " " + u2.LastName,
+                                        a.UpdatedAt
+                                    }).OrderByDescending(a => a.Id).ToList();
 
                 dgvMain.DataSource = areas;
             }
@@ -305,47 +327,65 @@ namespace PRTS.App {
                 var lots = 
                     (from l in _db.Lots
                         join a in _db.AreaProfiles on l.AreaId equals a.AreaId
-                            select new {
-                                Id = l.LotId,
-                                Area = a.AreaDescription,
-                                Description = l.LotDescription,
-                                l.Block,
-                                l.Sqm,
-                                a.Remarks,
-                                Status = a.Status == 1 ? "Open" : "Closed",
-                                a.CreatedAt,
-                                a.UpdatedAt
-                            }).OrderByDescending(l => l.Id).ToList();
+                             join u in _db.Users on l.CreatedBy equals u.UserId into au
+                                from u in au.DefaultIfEmpty()
+                                    join u2 in _db.Users on l.UpdatedBy equals u2.UserId into au2
+                                        from u2 in au2.DefaultIfEmpty()
+                                             select new {
+                                                Id = l.LotId,
+                                                Area = a.AreaDescription,
+                                                Description = l.LotDescription,
+                                                l.Block,
+                                                l.Sqm,
+                                                a.Remarks,
+                                                Status = a.Status == 1 ? "Open" : "Closed",
+                                                CreatedBy = u.FirstName + " " + u.LastName,
+                                                l.CreatedAt,
+                                                UpdatedBy = u2.FirstName + " " + u2.LastName,
+                                                l.UpdatedAt
+                                            }).OrderByDescending(l => l.Id).ToList();
 
                 dgvMain.DataSource = lots;
             }
             else if (_currentModule == ModGlobal.ModAgents) {
                 var agents =
                     (from a in _db.Agents
-                        select new {
-                            Id = a.AgentId,
-                            Fullname = a.FirstName + " " + a.LastName,
-                            a.Contact,
-                            a.IsActive,
-                            a.CreatedAt,
-                            a.UpdatedAt
-                        }).OrderByDescending(a => a.Id).ToList();
+                         join u in _db.Users on a.CreatedBy equals u.UserId into au
+                             from u in au.DefaultIfEmpty()
+                                join u2 in _db.Users on a.UpdatedBy equals u2.UserId into au2
+                                    from u2 in au2.DefaultIfEmpty()
+                                         select new {
+                                                Id = a.AgentId,
+                                                Fullname = a.FirstName + " " + a.LastName,
+                                                a.Contact,
+                                                IsActive = a.IsActive ?? false,
+                                                CreatedBy = u.FirstName + " " + u.LastName,
+                                                a.CreatedAt,
+                                                UpdatedBy = u2.FirstName + " " + u2.LastName,
+                                                a.UpdatedAt
+                                            }).OrderByDescending(a => a.Id).ToList();
 
                 dgvMain.DataSource = agents;
             }
             else if (_currentModule == ModGlobal.ModClients) {
                 var clients =
                     (from c in _db.Clients
-                        select new {
-                            Id = c.ClientId,
-                            Fullname = c.FirstName + " " + c.LastName,
-                            c.Address,
-                            c.Contact1,
-                            c.Contact2,
-                            c.IsActive,
-                            c.CreatedAt,
-                            c.UpdatedAt
-                        }).OrderByDescending(c => c.Id).ToList();
+                         join u in _db.Users on c.CreatedBy equals u.UserId into au
+                             from u in au.DefaultIfEmpty()
+                                 join u2 in _db.Users on c.UpdatedBy equals u2.UserId into au2
+                                    from u2 in au2.DefaultIfEmpty()
+                                         select new {
+                                                Id = c.ClientId,
+                                                Fullname = c.FirstName + " " + c.LastName,
+                                                c.Address,
+                                                c.Contact1,
+                                                c.Contact2,
+                                                IsActive = c.IsActive ?? false,
+                                                CreatedBy = u.FirstName + " " + u.LastName,
+                                                c.CreatedAt,
+                                                UpdatedBy = u2.FirstName + " " + u2.LastName,
+                                                c.UpdatedAt
+                                            }).OrderByDescending(c => c.Id).ToList();
 
                 dgvMain.DataSource = clients;
             }
@@ -403,10 +443,14 @@ namespace PRTS.App {
                 dgvMain.Columns[4].Visible = false;
                 dgvMain.Columns[5].Width = 100;
                 dgvMain.Columns[5].HeaderText = @"Status";
-                dgvMain.Columns[6].Width = 150;
-                dgvMain.Columns[6].HeaderText = @"Created At";
+                dgvMain.Columns[6].Width = 200;
+                dgvMain.Columns[6].HeaderText = @"Created By";
                 dgvMain.Columns[7].Width = 150;
-                dgvMain.Columns[7].HeaderText = @"Updated At";
+                dgvMain.Columns[7].HeaderText = @"Created At";
+                dgvMain.Columns[8].Width = 200;
+                dgvMain.Columns[8].HeaderText = @"Updated By";
+                dgvMain.Columns[9].Width = 150;
+                dgvMain.Columns[9].HeaderText = @"Updated At";
             }
             else if (_currentModule == ModGlobal.ModLots) {
                 dgvMain.Columns[0].Width = 50;
@@ -422,10 +466,14 @@ namespace PRTS.App {
                 dgvMain.Columns[5].Visible = false;
                 dgvMain.Columns[6].Width = 100;
                 dgvMain.Columns[6].HeaderText = @"Status";
-                dgvMain.Columns[7].Width = 150;
-                dgvMain.Columns[7].HeaderText = @"Created At";
+                dgvMain.Columns[7].Width = 200;
+                dgvMain.Columns[7].HeaderText = @"Created By";
                 dgvMain.Columns[8].Width = 150;
-                dgvMain.Columns[8].HeaderText = @"Updated At";
+                dgvMain.Columns[8].HeaderText = @"Created At";
+                dgvMain.Columns[9].Width = 200;
+                dgvMain.Columns[9].HeaderText = @"Updated By";
+                dgvMain.Columns[10].Width = 150;
+                dgvMain.Columns[10].HeaderText = @"Updated At";
             }
             else if (_currentModule == ModGlobal.ModAgents) {
                 dgvMain.Columns[0].Width = 50;
@@ -436,10 +484,14 @@ namespace PRTS.App {
                 dgvMain.Columns[2].HeaderText = @"Contact";
                 dgvMain.Columns[3].Width = 100;
                 dgvMain.Columns[3].HeaderText = @"Is Active?";
-                dgvMain.Columns[4].Width = 150;
-                dgvMain.Columns[4].HeaderText = @"Created At";
+                dgvMain.Columns[4].Width = 200;
+                dgvMain.Columns[4].HeaderText = @"Created By";
                 dgvMain.Columns[5].Width = 150;
-                dgvMain.Columns[5].HeaderText = @"Updated At";
+                dgvMain.Columns[5].HeaderText = @"Created At";
+                dgvMain.Columns[6].Width = 200;
+                dgvMain.Columns[6].HeaderText = @"Updated By";
+                dgvMain.Columns[7].Width = 150;
+                dgvMain.Columns[7].HeaderText = @"Updated At";
             }
             else if (_currentModule == ModGlobal.ModClients)
             {
@@ -455,10 +507,14 @@ namespace PRTS.App {
                 dgvMain.Columns[4].HeaderText = @"Contact 2";
                 dgvMain.Columns[5].Width = 100;
                 dgvMain.Columns[5].HeaderText = @"Is Active?";
-                dgvMain.Columns[6].Width = 150;
-                dgvMain.Columns[6].HeaderText = @"Created At";
+                dgvMain.Columns[6].Width = 200;
+                dgvMain.Columns[6].HeaderText = @"Created By";
                 dgvMain.Columns[7].Width = 150;
-                dgvMain.Columns[7].HeaderText = @"Updated At";
+                dgvMain.Columns[7].HeaderText = @"Created At";
+                dgvMain.Columns[8].Width = 200;
+                dgvMain.Columns[8].HeaderText = @"Updated By";
+                dgvMain.Columns[9].Width = 150;
+                dgvMain.Columns[9].HeaderText = @"Updated At";
             }
         }
 
