@@ -14,6 +14,8 @@
 
         public bool Clients { get; set; }
 
+        public bool Acquisition { get; set; }
+
         public bool IncomingPayments { get; set; }
 
         public bool OutgoingPayments { get; set; }

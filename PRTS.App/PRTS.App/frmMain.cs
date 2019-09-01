@@ -82,7 +82,7 @@
                 var user = new FrmUser(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value), ModGlobal.FormStatus.IsView);
                 user.ShowDialog();
             } else if (_currentModule == ModGlobal.ModUserPrivileges) {
-                var user = new FrmUserPrivileges(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value), ModGlobal.FormStatus.IsView);
+                var user = new FrmUserPrivileges(Convert.ToInt32(dgvMain.SelectedRows[0].Cells[0].Value), ModGlobal.FormStatus.IsView);
                 user.ShowDialog();
             } else if (_currentModule == ModGlobal.ModAreaProfile) {
                 var area = new FrmAreaProfile(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value), ModGlobal.FormStatus.IsView);
@@ -172,7 +172,7 @@
                     LoadData();
                 }
             } else if (_currentModule == ModGlobal.ModUserPrivileges) {
-                var user = new FrmUserPrivileges(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value),
+                var user = new FrmUserPrivileges(Convert.ToInt32(dgvMain.SelectedRows[0].Cells[0].Value),
                     ModGlobal.FormStatus.IsEdit);
                 user.ShowDialog();
 
@@ -226,6 +226,7 @@
             btnLots.Enabled = ModGlobal.PrivLots;
             btnAgents.Enabled = ModGlobal.PrivAgents;
             btnClients.Enabled = ModGlobal.PrivClients;
+            btnAcquisition.Enabled = ModGlobal.PrivAcquisition;
             btnIncomingPayments.Enabled = ModGlobal.PrivIncomingPayments;
             btnOutgoingPayments.Enabled = ModGlobal.PrivOutgoingPayments;
             btnReports.Enabled = ModGlobal.PrivReports;
@@ -262,6 +263,7 @@
             btnLots.Text = @" " + ModGlobal.ModLots;
             btnAgents.Text = @" " + ModGlobal.ModAgents;
             btnClients.Text = @" " + ModGlobal.ModClients;
+            btnAcquisition.Text = @" " + ModGlobal.ModAcquisition;
             btnIncomingPayments.Text = @" " + ModGlobal.ModIncomingPayments;
             btnOutgoingPayments.Text = @" " + ModGlobal.ModOutgoingPayments;
             btnReports.Text = @" " + ModGlobal.ModReports;
@@ -396,14 +398,14 @@
         private void FormatGrid() {
 
             dgvMain.DefaultCellStyle.Font = new Font("Century Gothic", 9, FontStyle.Regular);
-            dgvMain.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
+            dgvMain.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvMain.RowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
             dgvMain.DefaultCellStyle.SelectionBackColor = Color.SeaGreen;
             dgvMain.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
 
-            dgvMain.EnableHeadersVisualStyles = true;
+            //dgvMain.EnableHeadersVisualStyles = true;
             dgvMain.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgvMain.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            //dgvMain.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvMain.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.False;
             dgvMain.ReadOnly = true;
 
@@ -523,6 +525,7 @@
             pnlLots.Visible = btnLots.Text.Trim() == title;
             pnlAgents.Visible = btnAgents.Text.Trim() == title;
             pnlClients.Visible = btnClients.Text.Trim() == title;
+            pnlAcquisition.Visible = btnAcquisition.Text.Trim() == title;
             pnlIncomingPayments.Visible = btnIncomingPayments.Text.Trim() == title;
             pnlOutgoingPayments.Visible = btnOutgoingPayments.Text.Trim() == title;
             pnlReports.Visible = btnReports.Text.Trim() == title;
