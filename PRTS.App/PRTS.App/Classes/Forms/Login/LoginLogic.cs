@@ -48,6 +48,7 @@ namespace PRTS.App.Classes.Forms.Login {
                     Lots = userPriv.FirstOrDefault(p => p.ModuleId == ModGlobal.ModLotsId)?.IsVisible ?? false,
                     Agents = userPriv.FirstOrDefault(p => p.ModuleId == ModGlobal.ModAgentsId)?.IsVisible ?? false,
                     Clients = userPriv.FirstOrDefault(p => p.ModuleId == ModGlobal.ModClientsId)?.IsVisible ?? false,
+                    Acquisition = userPriv.FirstOrDefault(p => p.ModuleId == ModGlobal.ModAcquisitionId)?.IsVisible ?? false,
                     IncomingPayments = userPriv.FirstOrDefault(p => p.ModuleId == ModGlobal.ModIncomingPaymentsId)?.IsVisible ?? false,
                     OutgoingPayments = userPriv.FirstOrDefault(p => p.ModuleId == ModGlobal.ModOutgoingPaymentsId)?.IsVisible ?? false,
                     Reports = userPriv.FirstOrDefault(p => p.ModuleId == ModGlobal.ModReportsId)?.IsVisible ?? false,
