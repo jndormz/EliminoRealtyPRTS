@@ -1,4 +1,8 @@
-﻿namespace PRTS.App.Forms.Users {
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+
+namespace PRTS.App.Forms.Users {
 
     using Classes;
     using System;
@@ -8,13 +12,13 @@
 
     public partial class FrmUserPrivileges : Form {
 
-        private readonly long _roleId;
+        private readonly int _roleId;
         private readonly DbEntities _db = new DbEntities();
         private readonly ModGlobal.FormStatus _formStatus;
 
         public bool IsSaved;
 
-        public FrmUserPrivileges(long roleId, ModGlobal.FormStatus formStatus) {
+        public FrmUserPrivileges(int roleId, ModGlobal.FormStatus formStatus) {
             InitializeComponent();
 
             _roleId = roleId;
@@ -30,6 +34,8 @@
             LoadUserData();
 
             EnabledControls();
+
+            FormatGrid();
         }
 
         private void BtnClose_Click(object sender, EventArgs e) {
@@ -84,6 +90,8 @@
                     CreatedBy = ModGlobal.UserId,
                     CreatedAt = DateTime.Now
                 });
+
+                SaveUserModules(newId);
             }
             else {
                 var getRole = _db.Roles.FirstOrDefault(u => u.RoleId == _roleId);
@@ -97,10 +105,34 @@
                 getRole.RoleName = txtRoleDescription.Text;
                 getRole.UpdatedBy = ModGlobal.UserId;
                 getRole.UpdatedAt = DateTime.Now;
+
+                DeleteUserModules();
+
+                SaveUserModules(_roleId);
             }
+
             _db.SaveChanges();
 
             IsSaved = true;
+        }
+
+        private void SaveUserModules(int id) {
+
+            for (var i = 0; i < dgvUserPrivileges.RowCount; i++) {
+
+                _db.UserPrivileges.Add(new UserPrivilege {
+                    RoleId = id,
+                    ModuleId = Convert.ToInt64(dgvUserPrivileges.Rows[i].Cells[2].Value),
+                    IsVisible = Convert.ToBoolean(dgvUserPrivileges.Rows[i].Cells[0].Value)
+                });
+            }
+        }
+
+        private void DeleteUserModules() {
+
+            var userPrivileges = _db.UserPrivileges.Where(u => u.RoleId == _roleId);
+
+            _db.UserPrivileges.RemoveRange(userPrivileges);
         }
 
         private string ValidateValues() {
@@ -121,6 +153,17 @@
                 var user = _db.Roles.FirstOrDefault(u => u.RoleId == _roleId);
 
                 txtRoleDescription.Text = user?.RoleName;
+
+                var userPrivileges = (from u in _db.UserPrivileges
+                                        join m in _db.Modules on u.ModuleId equals m.ModuleId
+                                            where u.RoleId == _roleId
+                                                select new ModuleModel {
+                                                    Select = u.IsVisible ?? false,
+                                                    ModuleName = m.ModuleName,
+                                                    ModuleId = m.ModuleId
+                                                }).ToList();
+
+                LoadDataTableToGrid(userPrivileges);
             }
         }
 
@@ -128,12 +171,55 @@
 
             var modules = 
                 (from m in _db.Modules
-                    select new {
-                        Select = false,
-                        m.ModuleName
+                    select new ModuleModel {
+                        Select = true,
+                        ModuleName = m.ModuleName,
+                        ModuleId = m.ModuleId
                     }).ToList();
 
-            dgvUserPrivileges.DataSource = modules;
+            LoadDataTableToGrid(modules);
+        }
+
+        private void LoadDataTableToGrid(List<ModuleModel> data) {
+            var dt = new DataTable();
+            dt.Columns.Add("Select", typeof(bool));
+            dt.Columns.Add("Module", typeof(string));
+            dt.Columns.Add("ModuleId", typeof(long));
+
+            foreach (var module in data) {
+                object[] dr = { module.Select, module.ModuleName, module.ModuleId };
+
+                dt.Rows.Add(dr);
+            }
+
+            dgvUserPrivileges.DataSource = dt;
+        }
+
+        private class ModuleModel {
+
+            public bool Select { get; set; }
+
+            public string ModuleName { get; set; }
+
+            public long ModuleId { get; set; }
+        }
+
+        private void FormatGrid() {
+            dgvUserPrivileges.DefaultCellStyle.Font = new Font("Century Gothic", 9, FontStyle.Regular);
+            dgvUserPrivileges.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
+            dgvUserPrivileges.RowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+            dgvUserPrivileges.DefaultCellStyle.SelectionBackColor = Color.SeaGreen;
+            dgvUserPrivileges.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
+
+            dgvUserPrivileges.EnableHeadersVisualStyles = true;
+            dgvUserPrivileges.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvUserPrivileges.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.False;
+            dgvUserPrivileges.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+
+            dgvUserPrivileges.Columns[0].Width = 50;
+            dgvUserPrivileges.Columns[1].Width = 330;
+            dgvUserPrivileges.Columns[1].HeaderText = @"Module";
+            dgvUserPrivileges.Columns[2].Visible = false;
         }
 
         private void EnabledControls() {
@@ -142,6 +228,7 @@
                 btnSave.Visible = false;
 
                 txtRoleDescription.ReadOnly = true;
+                dgvUserPrivileges.ReadOnly = true;
             }
         }
 

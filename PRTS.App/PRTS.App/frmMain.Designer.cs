@@ -46,7 +46,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnAreaProfile = new System.Windows.Forms.Button();
             this.pnlSidebar = new System.Windows.Forms.Panel();
-            this.panel14 = new System.Windows.Forms.Panel();
+            this.pnlAcquisition = new System.Windows.Forms.Panel();
+            this.btnAcquisition = new System.Windows.Forms.Button();
             this.pnlReports = new System.Windows.Forms.Panel();
             this.btnReports = new System.Windows.Forms.Button();
             this.panel13 = new System.Windows.Forms.Panel();
@@ -58,15 +59,12 @@
             this.panel11 = new System.Windows.Forms.Panel();
             this.pnlLogout = new System.Windows.Forms.Panel();
             this.btnLogout = new System.Windows.Forms.Button();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.pnlOutgoingPayments = new System.Windows.Forms.Panel();
-            this.btnOutgoingPayments = new System.Windows.Forms.Button();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.pnlIncomingPayments = new System.Windows.Forms.Panel();
-            this.btnIncomingPayments = new System.Windows.Forms.Button();
-            this.panel8 = new System.Windows.Forms.Panel();
             this.pnlClients = new System.Windows.Forms.Panel();
             this.btnClients = new System.Windows.Forms.Button();
+            this.pnlIncomingPayments = new System.Windows.Forms.Panel();
+            this.btnIncomingPayments = new System.Windows.Forms.Button();
+            this.pnlOutgoingPayments = new System.Windows.Forms.Panel();
+            this.btnOutgoingPayments = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pnlAgents = new System.Windows.Forms.Panel();
             this.btnAgents = new System.Windows.Forms.Button();
@@ -81,22 +79,28 @@
             this.lblUser = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvMain = new System.Windows.Forms.DataGridView();
+            this.pnlClientsContainer = new System.Windows.Forms.Panel();
+            this.pnlAcquisitionContainer = new System.Windows.Forms.Panel();
+            this.pnlIncomingPaymentContainer = new System.Windows.Forms.Panel();
+            this.pnlOutgoingPaymentContainer = new System.Windows.Forms.Panel();
+            this.pnlReportsContianer = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.panel3.SuspendLayout();
             this.pnlSidebar.SuspendLayout();
-            this.panel14.SuspendLayout();
             this.panel13.SuspendLayout();
             this.panel12.SuspendLayout();
             this.panel11.SuspendLayout();
-            this.panel10.SuspendLayout();
-            this.panel9.SuspendLayout();
-            this.panel8.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).BeginInit();
+            this.pnlClientsContainer.SuspendLayout();
+            this.pnlAcquisitionContainer.SuspendLayout();
+            this.pnlIncomingPaymentContainer.SuspendLayout();
+            this.pnlOutgoingPaymentContainer.SuspendLayout();
+            this.pnlReportsContianer.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -279,13 +283,14 @@
             // pnlSidebar
             // 
             this.pnlSidebar.BackColor = System.Drawing.Color.MintCream;
-            this.pnlSidebar.Controls.Add(this.panel14);
+            this.pnlSidebar.Controls.Add(this.pnlReportsContianer);
+            this.pnlSidebar.Controls.Add(this.pnlOutgoingPaymentContainer);
+            this.pnlSidebar.Controls.Add(this.pnlIncomingPaymentContainer);
+            this.pnlSidebar.Controls.Add(this.pnlAcquisitionContainer);
+            this.pnlSidebar.Controls.Add(this.pnlClientsContainer);
             this.pnlSidebar.Controls.Add(this.panel13);
             this.pnlSidebar.Controls.Add(this.panel12);
             this.pnlSidebar.Controls.Add(this.panel11);
-            this.pnlSidebar.Controls.Add(this.panel10);
-            this.pnlSidebar.Controls.Add(this.panel9);
-            this.pnlSidebar.Controls.Add(this.panel8);
             this.pnlSidebar.Controls.Add(this.panel6);
             this.pnlSidebar.Controls.Add(this.panel7);
             this.pnlSidebar.Controls.Add(this.panel5);
@@ -295,15 +300,34 @@
             this.pnlSidebar.Size = new System.Drawing.Size(200, 735);
             this.pnlSidebar.TabIndex = 2;
             // 
-            // panel14
+            // pnlAcquisition
             // 
-            this.panel14.Controls.Add(this.pnlReports);
-            this.panel14.Controls.Add(this.btnReports);
-            this.panel14.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel14.Location = new System.Drawing.Point(0, 306);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(200, 51);
-            this.panel14.TabIndex = 17;
+            this.pnlAcquisition.BackColor = System.Drawing.Color.SeaGreen;
+            this.pnlAcquisition.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlAcquisition.Location = new System.Drawing.Point(0, 0);
+            this.pnlAcquisition.Name = "pnlAcquisition";
+            this.pnlAcquisition.Size = new System.Drawing.Size(10, 55);
+            this.pnlAcquisition.TabIndex = 11;
+            // 
+            // btnAcquisition
+            // 
+            this.btnAcquisition.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAcquisition.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnAcquisition.FlatAppearance.BorderSize = 0;
+            this.btnAcquisition.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAcquisition.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAcquisition.ForeColor = System.Drawing.Color.SeaGreen;
+            this.btnAcquisition.Image = ((System.Drawing.Image)(resources.GetObject("btnAcquisition.Image")));
+            this.btnAcquisition.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAcquisition.Location = new System.Drawing.Point(12, 0);
+            this.btnAcquisition.Name = "btnAcquisition";
+            this.btnAcquisition.Size = new System.Drawing.Size(188, 55);
+            this.btnAcquisition.TabIndex = 11;
+            this.btnAcquisition.Text = " Acquisition";
+            this.btnAcquisition.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAcquisition.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAcquisition.UseVisualStyleBackColor = true;
+            this.btnAcquisition.Click += new System.EventHandler(this.BtnModule_Click);
             // 
             // pnlReports
             // 
@@ -311,8 +335,8 @@
             this.pnlReports.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlReports.Location = new System.Drawing.Point(0, 0);
             this.pnlReports.Name = "pnlReports";
-            this.pnlReports.Size = new System.Drawing.Size(10, 51);
-            this.pnlReports.TabIndex = 5;
+            this.pnlReports.Size = new System.Drawing.Size(10, 49);
+            this.pnlReports.TabIndex = 14;
             // 
             // btnReports
             // 
@@ -324,10 +348,10 @@
             this.btnReports.ForeColor = System.Drawing.Color.SeaGreen;
             this.btnReports.Image = ((System.Drawing.Image)(resources.GetObject("btnReports.Image")));
             this.btnReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReports.Location = new System.Drawing.Point(12, 0);
+            this.btnReports.Location = new System.Drawing.Point(13, 0);
             this.btnReports.Name = "btnReports";
-            this.btnReports.Size = new System.Drawing.Size(188, 51);
-            this.btnReports.TabIndex = 0;
+            this.btnReports.Size = new System.Drawing.Size(187, 49);
+            this.btnReports.TabIndex = 14;
             this.btnReports.Text = " Reports";
             this.btnReports.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReports.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -451,53 +475,34 @@
             this.btnLogout.UseVisualStyleBackColor = true;
             this.btnLogout.Click += new System.EventHandler(this.BtnLogout_Click);
             // 
-            // panel10
+            // pnlClients
             // 
-            this.panel10.Controls.Add(this.pnlOutgoingPayments);
-            this.panel10.Controls.Add(this.btnOutgoingPayments);
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel10.Location = new System.Drawing.Point(0, 255);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(200, 51);
-            this.panel10.TabIndex = 12;
+            this.pnlClients.BackColor = System.Drawing.Color.SeaGreen;
+            this.pnlClients.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlClients.Location = new System.Drawing.Point(0, 0);
+            this.pnlClients.Name = "pnlClients";
+            this.pnlClients.Size = new System.Drawing.Size(10, 55);
+            this.pnlClients.TabIndex = 10;
             // 
-            // pnlOutgoingPayments
+            // btnClients
             // 
-            this.pnlOutgoingPayments.BackColor = System.Drawing.Color.SeaGreen;
-            this.pnlOutgoingPayments.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlOutgoingPayments.Location = new System.Drawing.Point(0, 0);
-            this.pnlOutgoingPayments.Name = "pnlOutgoingPayments";
-            this.pnlOutgoingPayments.Size = new System.Drawing.Size(10, 51);
-            this.pnlOutgoingPayments.TabIndex = 5;
-            // 
-            // btnOutgoingPayments
-            // 
-            this.btnOutgoingPayments.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOutgoingPayments.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnOutgoingPayments.FlatAppearance.BorderSize = 0;
-            this.btnOutgoingPayments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOutgoingPayments.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOutgoingPayments.ForeColor = System.Drawing.Color.SeaGreen;
-            this.btnOutgoingPayments.Image = ((System.Drawing.Image)(resources.GetObject("btnOutgoingPayments.Image")));
-            this.btnOutgoingPayments.Location = new System.Drawing.Point(12, 0);
-            this.btnOutgoingPayments.Name = "btnOutgoingPayments";
-            this.btnOutgoingPayments.Size = new System.Drawing.Size(188, 51);
-            this.btnOutgoingPayments.TabIndex = 0;
-            this.btnOutgoingPayments.Text = " Outgoing Payments";
-            this.btnOutgoingPayments.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnOutgoingPayments.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnOutgoingPayments.UseVisualStyleBackColor = true;
-            this.btnOutgoingPayments.Click += new System.EventHandler(this.BtnModule_Click);
-            // 
-            // panel9
-            // 
-            this.panel9.Controls.Add(this.pnlIncomingPayments);
-            this.panel9.Controls.Add(this.btnIncomingPayments);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel9.Location = new System.Drawing.Point(0, 204);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(200, 51);
-            this.panel9.TabIndex = 11;
+            this.btnClients.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnClients.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnClients.FlatAppearance.BorderSize = 0;
+            this.btnClients.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClients.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClients.ForeColor = System.Drawing.Color.SeaGreen;
+            this.btnClients.Image = ((System.Drawing.Image)(resources.GetObject("btnClients.Image")));
+            this.btnClients.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClients.Location = new System.Drawing.Point(9, 0);
+            this.btnClients.Name = "btnClients";
+            this.btnClients.Size = new System.Drawing.Size(191, 55);
+            this.btnClients.TabIndex = 10;
+            this.btnClients.Text = " Clients";
+            this.btnClients.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClients.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnClients.UseVisualStyleBackColor = true;
+            this.btnClients.Click += new System.EventHandler(this.BtnModule_Click);
             // 
             // pnlIncomingPayments
             // 
@@ -505,8 +510,8 @@
             this.pnlIncomingPayments.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlIncomingPayments.Location = new System.Drawing.Point(0, 0);
             this.pnlIncomingPayments.Name = "pnlIncomingPayments";
-            this.pnlIncomingPayments.Size = new System.Drawing.Size(10, 51);
-            this.pnlIncomingPayments.TabIndex = 5;
+            this.pnlIncomingPayments.Size = new System.Drawing.Size(10, 53);
+            this.pnlIncomingPayments.TabIndex = 12;
             // 
             // btnIncomingPayments
             // 
@@ -519,52 +524,41 @@
             this.btnIncomingPayments.Image = ((System.Drawing.Image)(resources.GetObject("btnIncomingPayments.Image")));
             this.btnIncomingPayments.Location = new System.Drawing.Point(12, 0);
             this.btnIncomingPayments.Name = "btnIncomingPayments";
-            this.btnIncomingPayments.Size = new System.Drawing.Size(188, 51);
-            this.btnIncomingPayments.TabIndex = 0;
+            this.btnIncomingPayments.Size = new System.Drawing.Size(188, 53);
+            this.btnIncomingPayments.TabIndex = 12;
             this.btnIncomingPayments.Text = " Incoming Payments";
             this.btnIncomingPayments.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnIncomingPayments.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnIncomingPayments.UseVisualStyleBackColor = true;
             this.btnIncomingPayments.Click += new System.EventHandler(this.BtnModule_Click);
             // 
-            // panel8
+            // pnlOutgoingPayments
             // 
-            this.panel8.Controls.Add(this.pnlClients);
-            this.panel8.Controls.Add(this.btnClients);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel8.Location = new System.Drawing.Point(0, 153);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(200, 51);
-            this.panel8.TabIndex = 10;
+            this.pnlOutgoingPayments.BackColor = System.Drawing.Color.SeaGreen;
+            this.pnlOutgoingPayments.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlOutgoingPayments.Location = new System.Drawing.Point(0, 0);
+            this.pnlOutgoingPayments.Name = "pnlOutgoingPayments";
+            this.pnlOutgoingPayments.Size = new System.Drawing.Size(10, 49);
+            this.pnlOutgoingPayments.TabIndex = 13;
             // 
-            // pnlClients
+            // btnOutgoingPayments
             // 
-            this.pnlClients.BackColor = System.Drawing.Color.SeaGreen;
-            this.pnlClients.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlClients.Location = new System.Drawing.Point(0, 0);
-            this.pnlClients.Name = "pnlClients";
-            this.pnlClients.Size = new System.Drawing.Size(10, 51);
-            this.pnlClients.TabIndex = 5;
-            // 
-            // btnClients
-            // 
-            this.btnClients.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClients.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnClients.FlatAppearance.BorderSize = 0;
-            this.btnClients.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClients.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClients.ForeColor = System.Drawing.Color.SeaGreen;
-            this.btnClients.Image = ((System.Drawing.Image)(resources.GetObject("btnClients.Image")));
-            this.btnClients.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClients.Location = new System.Drawing.Point(12, 0);
-            this.btnClients.Name = "btnClients";
-            this.btnClients.Size = new System.Drawing.Size(188, 51);
-            this.btnClients.TabIndex = 0;
-            this.btnClients.Text = " Clients";
-            this.btnClients.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClients.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnClients.UseVisualStyleBackColor = true;
-            this.btnClients.Click += new System.EventHandler(this.BtnModule_Click);
+            this.btnOutgoingPayments.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOutgoingPayments.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnOutgoingPayments.FlatAppearance.BorderSize = 0;
+            this.btnOutgoingPayments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOutgoingPayments.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOutgoingPayments.ForeColor = System.Drawing.Color.SeaGreen;
+            this.btnOutgoingPayments.Image = ((System.Drawing.Image)(resources.GetObject("btnOutgoingPayments.Image")));
+            this.btnOutgoingPayments.Location = new System.Drawing.Point(13, 0);
+            this.btnOutgoingPayments.Name = "btnOutgoingPayments";
+            this.btnOutgoingPayments.Size = new System.Drawing.Size(187, 49);
+            this.btnOutgoingPayments.TabIndex = 13;
+            this.btnOutgoingPayments.Text = " Outgoing Payments";
+            this.btnOutgoingPayments.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnOutgoingPayments.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnOutgoingPayments.UseVisualStyleBackColor = true;
+            this.btnOutgoingPayments.Click += new System.EventHandler(this.BtnModule_Click);
             // 
             // panel6
             // 
@@ -727,6 +721,56 @@
             this.dgvMain.Size = new System.Drawing.Size(1041, 708);
             this.dgvMain.TabIndex = 4;
             // 
+            // pnlClientsContainer
+            // 
+            this.pnlClientsContainer.Controls.Add(this.pnlClients);
+            this.pnlClientsContainer.Controls.Add(this.btnClients);
+            this.pnlClientsContainer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlClientsContainer.Location = new System.Drawing.Point(0, 153);
+            this.pnlClientsContainer.Name = "pnlClientsContainer";
+            this.pnlClientsContainer.Size = new System.Drawing.Size(200, 55);
+            this.pnlClientsContainer.TabIndex = 10;
+            // 
+            // pnlAcquisitionContainer
+            // 
+            this.pnlAcquisitionContainer.Controls.Add(this.btnAcquisition);
+            this.pnlAcquisitionContainer.Controls.Add(this.pnlAcquisition);
+            this.pnlAcquisitionContainer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlAcquisitionContainer.Location = new System.Drawing.Point(0, 208);
+            this.pnlAcquisitionContainer.Name = "pnlAcquisitionContainer";
+            this.pnlAcquisitionContainer.Size = new System.Drawing.Size(200, 55);
+            this.pnlAcquisitionContainer.TabIndex = 11;
+            // 
+            // pnlIncomingPaymentContainer
+            // 
+            this.pnlIncomingPaymentContainer.Controls.Add(this.btnIncomingPayments);
+            this.pnlIncomingPaymentContainer.Controls.Add(this.pnlIncomingPayments);
+            this.pnlIncomingPaymentContainer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlIncomingPaymentContainer.Location = new System.Drawing.Point(0, 263);
+            this.pnlIncomingPaymentContainer.Name = "pnlIncomingPaymentContainer";
+            this.pnlIncomingPaymentContainer.Size = new System.Drawing.Size(200, 53);
+            this.pnlIncomingPaymentContainer.TabIndex = 12;
+            // 
+            // pnlOutgoingPaymentContainer
+            // 
+            this.pnlOutgoingPaymentContainer.Controls.Add(this.btnOutgoingPayments);
+            this.pnlOutgoingPaymentContainer.Controls.Add(this.pnlOutgoingPayments);
+            this.pnlOutgoingPaymentContainer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlOutgoingPaymentContainer.Location = new System.Drawing.Point(0, 316);
+            this.pnlOutgoingPaymentContainer.Name = "pnlOutgoingPaymentContainer";
+            this.pnlOutgoingPaymentContainer.Size = new System.Drawing.Size(200, 49);
+            this.pnlOutgoingPaymentContainer.TabIndex = 13;
+            // 
+            // pnlReportsContianer
+            // 
+            this.pnlReportsContianer.Controls.Add(this.btnReports);
+            this.pnlReportsContianer.Controls.Add(this.pnlReports);
+            this.pnlReportsContianer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlReportsContianer.Location = new System.Drawing.Point(0, 365);
+            this.pnlReportsContianer.Name = "pnlReportsContianer";
+            this.pnlReportsContianer.Size = new System.Drawing.Size(200, 49);
+            this.pnlReportsContianer.TabIndex = 14;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -752,19 +796,20 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.pnlSidebar.ResumeLayout(false);
-            this.panel14.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
             this.panel12.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
-            this.panel10.ResumeLayout(false);
-            this.panel9.ResumeLayout(false);
-            this.panel8.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMain)).EndInit();
+            this.pnlClientsContainer.ResumeLayout(false);
+            this.pnlAcquisitionContainer.ResumeLayout(false);
+            this.pnlIncomingPaymentContainer.ResumeLayout(false);
+            this.pnlOutgoingPaymentContainer.ResumeLayout(false);
+            this.pnlReportsContianer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -794,19 +839,15 @@
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Panel pnlLogout;
         private System.Windows.Forms.Button btnLogout;
-        private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Panel pnlOutgoingPayments;
         private System.Windows.Forms.Button btnOutgoingPayments;
-        private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Panel pnlIncomingPayments;
         private System.Windows.Forms.Button btnIncomingPayments;
-        private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel pnlClients;
         private System.Windows.Forms.Button btnClients;
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.Panel pnlUserManagement;
         private System.Windows.Forms.Button btnUserManagement;
-        private System.Windows.Forms.Panel panel14;
         private System.Windows.Forms.Panel pnlReports;
         private System.Windows.Forms.Button btnReports;
         private System.Windows.Forms.Panel panel13;
@@ -823,6 +864,13 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.Panel pnlAcquisition;
+        private System.Windows.Forms.Button btnAcquisition;
+        private System.Windows.Forms.Panel pnlIncomingPaymentContainer;
+        private System.Windows.Forms.Panel pnlAcquisitionContainer;
+        private System.Windows.Forms.Panel pnlClientsContainer;
+        private System.Windows.Forms.Panel pnlOutgoingPaymentContainer;
+        private System.Windows.Forms.Panel pnlReportsContianer;
     }
 }
 

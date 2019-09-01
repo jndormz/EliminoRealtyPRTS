@@ -80,11 +80,12 @@ namespace PRTS.App.Forms {
                 ModGlobal.PrivLots = userLogin.Data.UserPrivileges.Lots;
                 ModGlobal.PrivAgents = userLogin.Data.UserPrivileges.Agents;
                 ModGlobal.PrivClients = userLogin.Data.UserPrivileges.Clients;
+                ModGlobal.PrivAcquisition = userLogin.Data.UserPrivileges.Acquisition;
                 ModGlobal.PrivIncomingPayments = userLogin.Data.UserPrivileges.IncomingPayments;
                 ModGlobal.PrivOutgoingPayments = userLogin.Data.UserPrivileges.OutgoingPayments;
-                ModGlobal.PrivReports = userLogin.Data.UserPrivileges.Reports;
-                ModGlobal.PrivUserPrivileges = userLogin.Data.UserPrivileges.UserPrivileges;
                 ModGlobal.PrivUserManagement = userLogin.Data.UserPrivileges.UserManagement;
+                ModGlobal.PrivUserPrivileges = userLogin.Data.UserPrivileges.UserPrivileges;
+                ModGlobal.PrivReports = userLogin.Data.UserPrivileges.Reports;
 
                 Dispose();
             }
