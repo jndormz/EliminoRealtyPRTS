@@ -27,6 +27,7 @@
           <Property Name="AreaId" Type="bigint" Nullable="false" />
           <Property Name="AreaDescription" Type="nvarchar(max)" />
           <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="PricePerSqm" Type="decimal" Precision="18" Scale="2" />
           <Property Name="CommisionPercentage" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Remarks" Type="nvarchar(max)" />
           <Property Name="Status" Type="int" />
@@ -60,6 +61,7 @@
           <Property Name="AreaId" Type="bigint" />
           <Property Name="LotDescription" Type="nvarchar(max)" />
           <Property Name="Sqm" Type="bigint" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Block" Type="bigint" />
           <Property Name="Remarks" Type="nvarchar(max)" />
           <Property Name="Status" Type="int" />
@@ -217,6 +219,7 @@
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Int64" />
           <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+          <Property Name="PricePerSqm" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Client">
           <Key>
@@ -250,6 +253,7 @@
           <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
           <Property Name="Sqm" Type="Int64" />
           <Property Name="Block" Type="Int64" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -328,6 +332,7 @@
           <EntitySetMapping Name="AreaProfiles">
             <EntityTypeMapping TypeName="DbModel.AreaProfile">
               <MappingFragment StoreEntitySet="AreaProfiles">
+                <ScalarProperty Name="PricePerSqm" ColumnName="PricePerSqm" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
@@ -362,6 +367,7 @@
           <EntitySetMapping Name="Lots">
             <EntityTypeMapping TypeName="DbModel.Lot">
               <MappingFragment StoreEntitySet="Lots">
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Block" ColumnName="Block" />
                 <ScalarProperty Name="Sqm" ColumnName="Sqm" />
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />

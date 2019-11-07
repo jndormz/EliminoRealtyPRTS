@@ -87,6 +87,7 @@
     <Property Name="CreatedAt" Type="DateTime" Precision="3" />
     <Property Name="UpdatedBy" Type="Int64" />
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
+    <Property Name="PricePerSqm" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="Client">
     <Key>
@@ -120,5 +121,6 @@
     <Property Name="UpdatedAt" Type="DateTime" Precision="3" />
     <Property Name="Sqm" Type="Int64" />
     <Property Name="Block" Type="Int64" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
   </EntityType>
 </Schema>

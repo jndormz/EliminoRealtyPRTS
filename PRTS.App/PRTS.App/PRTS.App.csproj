@@ -124,6 +124,12 @@
     <Compile Include="Forms\frmLogIn.Designer.cs">
       <DependentUpon>frmLogIn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Helpers\frmLookup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Helpers\frmLookup.Designer.cs">
+      <DependentUpon>frmLookup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Libraries\frmClients.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +153,12 @@
     </Compile>
     <Compile Include="Forms\Libraries\frmAgents.Designer.cs">
       <DependentUpon>frmAgents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Transactions\frmAcquisition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Transactions\frmAcquisition.Designer.cs">
+      <DependentUpon>frmAcquisition.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Users\frmUserPrivileges.cs">
       <SubType>Form</SubType>
@@ -186,6 +198,9 @@
     <EmbeddedResource Include="Forms\frmLogIn.resx">
       <DependentUpon>frmLogIn.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Helpers\frmLookup.resx">
+      <DependentUpon>frmLookup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Libraries\frmClients.resx">
       <DependentUpon>frmClients.cs</DependentUpon>
     </EmbeddedResource>
@@ -197,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Libraries\frmAgents.resx">
       <DependentUpon>frmAgents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Transactions\frmAcquisition.resx">
+      <DependentUpon>frmAcquisition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Users\frmUserPrivileges.resx">
       <DependentUpon>frmUserPrivileges.cs</DependentUpon>

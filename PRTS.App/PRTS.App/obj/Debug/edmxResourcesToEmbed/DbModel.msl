@@ -72,6 +72,7 @@
     <EntitySetMapping Name="AreaProfiles">
       <EntityTypeMapping TypeName="DbModel.AreaProfile">
         <MappingFragment StoreEntitySet="AreaProfiles">
+          <ScalarProperty Name="PricePerSqm" ColumnName="PricePerSqm" />
           <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
           <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
@@ -106,6 +107,7 @@
     <EntitySetMapping Name="Lots">
       <EntityTypeMapping TypeName="DbModel.Lot">
         <MappingFragment StoreEntitySet="Lots">
+          <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Block" ColumnName="Block" />
           <ScalarProperty Name="Sqm" ColumnName="Sqm" />
           <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />

@@ -80,6 +80,18 @@
             }
         }
 
+        private void TxtPricePerSqm_TextChanged(object sender, EventArgs e) {
+            if (System.Text.RegularExpressions.Regex.IsMatch(txtCommisionPercentage.Text, "  ^ [0-9]")) {
+                txtCommisionPercentage.Text = "";
+            }
+        }
+
+        private void TxtPricePerSqm_KeyPress(object sender, KeyPressEventArgs e) {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.')) {
+                e.Handled = true;
+            }
+        }
+
         #endregion
 
         #region Functions & Methods
@@ -95,6 +107,7 @@
                     AreaId = newId,
                     AreaDescription = txtAreaDescription.Text,
                     Address = txtAddress.Text,
+                    PricePerSqm = Convert.ToDecimal(txtPricePerSqm.Text),
                     CommisionPercentage = Convert.ToDecimal(txtCommisionPercentage.Text),
                     Remarks = txtRemarks.Text,
                     CreatedBy = ModGlobal.UserId,
@@ -113,6 +126,7 @@
 
                 getAreaProfile.AreaDescription = txtAreaDescription.Text;
                 getAreaProfile.Address = txtAddress.Text;
+                getAreaProfile.PricePerSqm = Convert.ToDecimal(txtPricePerSqm.Text);
                 getAreaProfile.CommisionPercentage = Convert.ToDecimal(txtCommisionPercentage.Text);
                 getAreaProfile.Remarks = txtRemarks.Text;
                 getAreaProfile.UpdatedBy = ModGlobal.UserId;
@@ -142,6 +156,7 @@
 
                 txtAreaDescription.Text = area?.AreaDescription;
                 txtAddress.Text = area?.Address;
+                txtPricePerSqm.Text = area?.PricePerSqm.ToString();
                 txtCommisionPercentage.Text = area?.CommisionPercentage.ToString();
                 txtRemarks.Text = area?.Remarks;
             }
@@ -154,6 +169,7 @@
 
                 txtAreaDescription.ReadOnly = true;
                 txtAddress.ReadOnly = true;
+                txtPricePerSqm.ReadOnly = true;
                 txtCommisionPercentage.ReadOnly = true;
                 txtRemarks.ReadOnly = true;
             }

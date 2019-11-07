@@ -22,6 +22,7 @@
     <Property Name="AreaId" Type="bigint" Nullable="false" />
     <Property Name="AreaDescription" Type="nvarchar(max)" />
     <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="PricePerSqm" Type="decimal" Precision="18" Scale="2" />
     <Property Name="CommisionPercentage" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Remarks" Type="nvarchar(max)" />
     <Property Name="Status" Type="int" />
@@ -55,6 +56,7 @@
     <Property Name="AreaId" Type="bigint" />
     <Property Name="LotDescription" Type="nvarchar(max)" />
     <Property Name="Sqm" Type="bigint" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Block" Type="bigint" />
     <Property Name="Remarks" Type="nvarchar(max)" />
     <Property Name="Status" Type="int" />

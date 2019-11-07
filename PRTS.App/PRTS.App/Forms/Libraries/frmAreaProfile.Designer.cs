@@ -46,6 +46,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.txtPricePerSqm = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.UserErrorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,7 +87,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.SeaGreen;
-            this.label3.Location = new System.Drawing.Point(102, 138);
+            this.label3.Location = new System.Drawing.Point(102, 175);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(88, 22);
             this.label3.TabIndex = 8;
@@ -94,7 +96,7 @@
             // txtAddress
             // 
             this.txtAddress.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddress.Location = new System.Drawing.Point(196, 135);
+            this.txtAddress.Location = new System.Drawing.Point(196, 172);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(243, 110);
@@ -117,8 +119,10 @@
             this.txtCommisionPercentage.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCommisionPercentage.Location = new System.Drawing.Point(196, 98);
             this.txtCommisionPercentage.Name = "txtCommisionPercentage";
+            this.txtCommisionPercentage.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.txtCommisionPercentage.Size = new System.Drawing.Size(243, 31);
             this.txtCommisionPercentage.TabIndex = 2;
+            this.txtCommisionPercentage.Text = "0";
             this.txtCommisionPercentage.TextChanged += new System.EventHandler(this.TxtCommisionPercentage_TextChanged);
             this.txtCommisionPercentage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtCommisionPercentage_KeyPress);
             this.txtCommisionPercentage.Validating += new System.ComponentModel.CancelEventHandler(this.Field_Validation);
@@ -128,7 +132,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.SeaGreen;
-            this.label5.Location = new System.Drawing.Point(98, 254);
+            this.label5.Location = new System.Drawing.Point(98, 291);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(92, 22);
             this.label5.TabIndex = 8;
@@ -137,7 +141,7 @@
             // txtRemarks
             // 
             this.txtRemarks.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRemarks.Location = new System.Drawing.Point(196, 251);
+            this.txtRemarks.Location = new System.Drawing.Point(196, 288);
             this.txtRemarks.Multiline = true;
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.Size = new System.Drawing.Size(243, 121);
@@ -149,7 +153,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.Color.SeaGreen;
-            this.btnSave.Location = new System.Drawing.Point(196, 416);
+            this.btnSave.Location = new System.Drawing.Point(196, 442);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(146, 32);
             this.btnSave.TabIndex = 5;
@@ -164,7 +168,7 @@
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.Color.Transparent;
-            this.btnClose.Location = new System.Drawing.Point(348, 416);
+            this.btnClose.Location = new System.Drawing.Point(348, 442);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(91, 32);
             this.btnClose.TabIndex = 6;
@@ -186,7 +190,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Location = new System.Drawing.Point(18, 397);
+            this.groupBox1.Location = new System.Drawing.Point(18, 423);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(450, 1);
             this.groupBox1.TabIndex = 14;
@@ -219,17 +223,42 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(90, 138);
+            this.label7.Location = new System.Drawing.Point(90, 175);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(19, 22);
             this.label7.TabIndex = 15;
             this.label7.Text = "*";
             // 
+            // txtPricePerSqm
+            // 
+            this.txtPricePerSqm.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPricePerSqm.Location = new System.Drawing.Point(196, 135);
+            this.txtPricePerSqm.Name = "txtPricePerSqm";
+            this.txtPricePerSqm.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.txtPricePerSqm.Size = new System.Drawing.Size(243, 31);
+            this.txtPricePerSqm.TabIndex = 16;
+            this.txtPricePerSqm.Text = "0.00";
+            this.txtPricePerSqm.TextChanged += new System.EventHandler(this.TxtPricePerSqm_TextChanged);
+            this.txtPricePerSqm.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtPricePerSqm_KeyPress);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.SeaGreen;
+            this.label8.Location = new System.Drawing.Point(51, 138);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(139, 22);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "Price per Sqm:";
+            // 
             // FrmAreaProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 473);
+            this.ClientSize = new System.Drawing.Size(472, 497);
+            this.Controls.Add(this.txtPricePerSqm);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnClose);
@@ -275,5 +304,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtPricePerSqm;
+        private System.Windows.Forms.Label label8;
     }
 }

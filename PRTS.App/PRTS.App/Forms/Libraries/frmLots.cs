@@ -1,4 +1,6 @@
-﻿namespace PRTS.App.Forms.Libraries {
+﻿using System.Globalization;
+
+namespace PRTS.App.Forms.Libraries {
 
     using Classes;
     using Classes.Helpers;
@@ -74,6 +76,8 @@
             if (System.Text.RegularExpressions.Regex.IsMatch(txtTotalSqm.Text, "  ^ [0-9]")) {
                 txtTotalSqm.Text = "";
             }
+
+            AutoCalulatePrice();
         }
 
         private void TxtTotalSqm_KeyPress(object sender, KeyPressEventArgs e) {
@@ -94,9 +98,28 @@
             }
         }
 
+        private void CmbArea_SelectedIndexChanged(object sender, EventArgs e) {
+
+            var selectedArea = cmbArea.SelectedItem.ToString();
+
+            var area = _db.AreaProfiles.FirstOrDefault(a => a.AreaDescription == selectedArea);
+
+            if (area == null) return;
+
+            txtPricePerSqm.Text = area.PricePerSqm.ToString();
+
+            AutoCalulatePrice();
+        }
+
         #endregion
 
         #region Functions
+
+        private void AutoCalulatePrice() {
+            if (string.IsNullOrEmpty(txtPricePerSqm.Text) || string.IsNullOrEmpty(txtTotalSqm.Text)) return;
+
+            txtPrice.Text = (Convert.ToDecimal(txtPricePerSqm.Text) * Convert.ToInt64(txtTotalSqm.Text)).ToString(CultureInfo.InvariantCulture);
+        }
 
         private void SaveLot() {
 
@@ -112,6 +135,7 @@
                     AreaId = Convert.ToInt32(comboItem.value),
                     LotDescription = txtLotDescription.Text,
                     Sqm = Convert.ToInt64(txtTotalSqm.Text),
+                    Price = Convert.ToDecimal(txtPrice.Text),
                     Block = Convert.ToInt64(string.IsNullOrEmpty(txtBlock.Text) ? "0" : txtBlock.Text),
                     Remarks = txtRemarks.Text,
                     CreatedBy = ModGlobal.UserId,
@@ -131,6 +155,7 @@
                 getLot.AreaId = Convert.ToInt32(comboItem.value);
                 getLot.LotDescription = txtLotDescription.Text;
                 getLot.Sqm = Convert.ToInt64(txtTotalSqm.Text);
+                getLot.Price = Convert.ToDecimal(txtPrice.Text);
                 getLot.Block = Convert.ToInt64(txtBlock.Text);
                 getLot.Remarks = txtRemarks.Text;
                 getLot.UpdatedBy = ModGlobal.UserId;
@@ -182,6 +207,7 @@
                 txtLotDescription.Text = lot?.LotDescription;
                 txtBlock.Text = lot?.Block.ToString();
                 txtTotalSqm.Text = lot?.Sqm.ToString();
+                txtPrice.Text = lot?.Price.ToString();
                 txtRemarks.Text = lot?.Remarks;
             }
         }
@@ -194,6 +220,7 @@
                 txtLotDescription.ReadOnly = true;
                 txtBlock.ReadOnly = true;
                 txtTotalSqm.ReadOnly = true;
+                txtPrice.ReadOnly = true;
                 txtRemarks.ReadOnly = true;
                 cmbArea.Enabled = false;
             }

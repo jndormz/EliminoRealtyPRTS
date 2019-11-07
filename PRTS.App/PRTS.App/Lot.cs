@@ -25,5 +25,6 @@ namespace PRTS.App
         public Nullable<System.DateTime> UpdatedAt { get; set; }
         public Nullable<long> Sqm { get; set; }
         public Nullable<long> Block { get; set; }
+        public Nullable<decimal> Price { get; set; }
     }
 }

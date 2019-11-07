@@ -3,6 +3,7 @@
     using Classes;
     using Forms;
     using Forms.Libraries;
+    using Forms.Transactions;
     using Forms.Users;
     using System;
     using System.Drawing;
@@ -97,6 +98,10 @@
                 var client = new FrmClients(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value), ModGlobal.FormStatus.IsView);
                 client.ShowDialog();
             }
+            else if (_currentModule == ModGlobal.ModAcquisition) {
+                var acquisition = new FrmAcquisition(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value), ModGlobal.FormStatus.IsView);
+                acquisition.ShowDialog();
+            }
         }
 
         private void TsAdd_Click(object sender, EventArgs e) {
@@ -151,6 +156,14 @@
                 client.ShowDialog();
 
                 if (client.IsSaved) {
+                    LoadData();
+                }
+            }
+            else if (_currentModule == ModGlobal.ModAcquisition) {
+                var acquisition = new FrmAcquisition(0, ModGlobal.FormStatus.IsNew);
+                acquisition.ShowDialog();
+
+                if (acquisition.IsSaved) {
                     LoadData();
                 }
             }
@@ -209,6 +222,14 @@
                 client.ShowDialog();
 
                 if (client.IsSaved) {
+                    LoadData();
+                }
+            } else if (_currentModule == ModGlobal.ModAcquisition) {
+                var acquisition = new FrmAcquisition(Convert.ToInt64(dgvMain.SelectedRows[0].Cells[0].Value),
+                    ModGlobal.FormStatus.IsEdit);
+                acquisition.ShowDialog();
+
+                if (acquisition.IsSaved) {
                     LoadData();
                 }
             }
@@ -314,6 +335,7 @@
                                         Id = a.AreaId,
                                         Description = a.AreaDescription,
                                         a.Address,
+                                        a.PricePerSqm,
                                         CommPercentage = a.CommisionPercentage,
                                         a.Remarks,
                                         Status = a.Status == 1 ? "Open" : "Closed",
@@ -339,6 +361,7 @@
                                                 Description = l.LotDescription,
                                                 l.Block,
                                                 l.Sqm,
+                                                l.Price,
                                                 a.Remarks,
                                                 Status = a.Status == 1 ? "Open" : "Closed",
                                                 CreatedBy = u.FirstName + " " + u.LastName,
@@ -441,30 +464,9 @@
                 dgvMain.Columns[2].Width = 350;
                 dgvMain.Columns[2].HeaderText = @"Address";
                 dgvMain.Columns[3].Width = 100;
-                dgvMain.Columns[3].HeaderText = @"Comm. %";
-                dgvMain.Columns[4].Visible = false;
-                dgvMain.Columns[5].Width = 100;
-                dgvMain.Columns[5].HeaderText = @"Status";
-                dgvMain.Columns[6].Width = 200;
-                dgvMain.Columns[6].HeaderText = @"Created By";
-                dgvMain.Columns[7].Width = 150;
-                dgvMain.Columns[7].HeaderText = @"Created At";
-                dgvMain.Columns[8].Width = 200;
-                dgvMain.Columns[8].HeaderText = @"Updated By";
-                dgvMain.Columns[9].Width = 150;
-                dgvMain.Columns[9].HeaderText = @"Updated At";
-            }
-            else if (_currentModule == ModGlobal.ModLots) {
-                dgvMain.Columns[0].Width = 50;
-                dgvMain.Columns[0].HeaderText = @"Id";
-                dgvMain.Columns[1].Width = 200;
-                dgvMain.Columns[1].HeaderText = @"Area";
-                dgvMain.Columns[2].Width = 300;
-                dgvMain.Columns[2].HeaderText = @"Description";
-                dgvMain.Columns[3].Width = 150;
-                dgvMain.Columns[3].HeaderText = @"Block";
-                dgvMain.Columns[4].Width = 150;
-                dgvMain.Columns[4].HeaderText = @"Sqm.";
+                dgvMain.Columns[3].HeaderText = @"Price per Sqm";
+                dgvMain.Columns[4].Width = 100;
+                dgvMain.Columns[4].HeaderText = @"Comm. %";
                 dgvMain.Columns[5].Visible = false;
                 dgvMain.Columns[6].Width = 100;
                 dgvMain.Columns[6].HeaderText = @"Status";
@@ -476,6 +478,31 @@
                 dgvMain.Columns[9].HeaderText = @"Updated By";
                 dgvMain.Columns[10].Width = 150;
                 dgvMain.Columns[10].HeaderText = @"Updated At";
+            }
+            else if (_currentModule == ModGlobal.ModLots) {
+                dgvMain.Columns[0].Width = 50;
+                dgvMain.Columns[0].HeaderText = @"Id";
+                dgvMain.Columns[1].Width = 200;
+                dgvMain.Columns[1].HeaderText = @"Area";
+                dgvMain.Columns[2].Width = 300;
+                dgvMain.Columns[2].HeaderText = @"Description";
+                dgvMain.Columns[3].Width = 100;
+                dgvMain.Columns[3].HeaderText = @"Block";
+                dgvMain.Columns[4].Width = 100;
+                dgvMain.Columns[4].HeaderText = @"Sqm.";
+                dgvMain.Columns[5].Width = 100;
+                dgvMain.Columns[5].HeaderText = @"Price";
+                dgvMain.Columns[6].Visible = false;
+                dgvMain.Columns[7].Width = 100;
+                dgvMain.Columns[7].HeaderText = @"Status";
+                dgvMain.Columns[8].Width = 200;
+                dgvMain.Columns[8].HeaderText = @"Created By";
+                dgvMain.Columns[9].Width = 150;
+                dgvMain.Columns[9].HeaderText = @"Created At";
+                dgvMain.Columns[10].Width = 200;
+                dgvMain.Columns[10].HeaderText = @"Updated By";
+                dgvMain.Columns[11].Width = 150;
+                dgvMain.Columns[11].HeaderText = @"Updated At";
             }
             else if (_currentModule == ModGlobal.ModAgents) {
                 dgvMain.Columns[0].Width = 50;
